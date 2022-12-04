@@ -11,21 +11,32 @@ public class ListeEntity {
     @PrimaryKey(autoGenerate = true)
     @NonNull
     @ColumnInfo(name = "liste_id")
-    private int id;
+    private Integer id;
 
     @NonNull
     @ColumnInfo(name = "liste_nom")
     private String nom;
 
-    public ListeEntity(@NonNull String nom) {
+    @ColumnInfo(name = "liste_lieu")
+    private String lieu;
+
+    public ListeEntity(@NonNull String nom, String lieu) {
         this.nom = nom;
+        this.lieu = lieu;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
     public String getNom() {
         return nom;
     }
+
+    public String getLieu() { return lieu; }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
 }

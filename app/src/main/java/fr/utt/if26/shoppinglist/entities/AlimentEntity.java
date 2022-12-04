@@ -11,7 +11,7 @@ public class AlimentEntity {
     @PrimaryKey(autoGenerate = true)
     @NonNull
     @ColumnInfo(name = "aliment_id")
-    private int id;
+    private Integer id;
 
     @NonNull
     @ColumnInfo(name = "aliment_nom")
@@ -26,7 +26,7 @@ public class AlimentEntity {
         this.categorie = categorie;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -37,4 +37,9 @@ public class AlimentEntity {
     public String getCategorie() {
         return categorie;
     }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
 }

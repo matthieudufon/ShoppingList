@@ -40,7 +40,7 @@ public interface AppDAO {
     @Query("DELETE FROM liste_table WHERE liste_id = :listeId")
     void deleteListeById(int listeId);
 
-    @Query("DELETE FROM compose_table WHERE compose_aliment_id = :alimentId AND compose_liste_id = :listeId")
+    @Query("DELETE FROM compose_table WHERE aliment_id = :alimentId AND liste_id = :listeId")
     void deleteListeById(int alimentId, int listeId);
 
     @Query("SELECT * FROM aliment_table")
@@ -58,7 +58,7 @@ public interface AppDAO {
     @Query("SELECT * FROM liste_table WHERE liste_id = :listeId")
     LiveData<ListeEntity> selectListeById(int listeId);
 
-    @Query("SELECT * FROM compose_table WHERE compose_aliment_id = :alimentId AND compose_liste_id = :listeId")
+    @Query("SELECT * FROM compose_table WHERE aliment_id = :alimentId AND liste_id = :listeId")
     LiveData<ComposeEntity> selectListeById(int alimentId, int listeId);
 
     @Update

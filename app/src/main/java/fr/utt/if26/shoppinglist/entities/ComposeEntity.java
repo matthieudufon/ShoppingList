@@ -8,31 +8,37 @@ import androidx.room.Entity;
 public class ComposeEntity {
 
     @NonNull
-    @ColumnInfo(name = "compose_aliment_id")
-    private int aliment_id;
+    @ColumnInfo(name = "aliment_id")
+    private Integer aliment_id;
 
     @NonNull
-    @ColumnInfo(name = "compose_liste_id")
-    private int liste_id;
+    @ColumnInfo(name = "liste_id")
+    private Integer liste_id;
 
     @ColumnInfo(name = "compose_quantite")
     private int quantite;
 
-    public ComposeEntity(@NonNull int aliment_id,@NonNull  int liste_id,@NonNull  int quantite) {
+    @ColumnInfo(name = "compose_priorite")
+    private int priorite;
+
+    public ComposeEntity(@NonNull int aliment_id, @NonNull int liste_id, @NonNull int quantite, int priorite) {
         this.aliment_id = aliment_id;
         this.liste_id = liste_id;
         this.quantite = quantite;
+        this.priorite = priorite;
     }
 
-    public int getAliment_id() {
+    public Integer getAliment_id() {
         return aliment_id;
     }
 
-    public int getListe_id() {
+    public Integer getListe_id() {
         return liste_id;
     }
 
     public int getQuantite() {
         return quantite;
     }
+
+    public int getPriorite() { return priorite; }
 }

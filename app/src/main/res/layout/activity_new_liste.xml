@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="2dp"
+    tools:context=".NewListeActivity"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/new_liste_activity_et1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nom"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/new_liste_activity_et2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Lieu (facultatif)"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/new_liste_activity_bt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Créer la liste" />
+
+</LinearLayout>

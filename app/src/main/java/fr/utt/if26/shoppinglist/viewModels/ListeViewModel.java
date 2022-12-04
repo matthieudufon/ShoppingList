@@ -22,7 +22,7 @@ public class ListeViewModel extends AndroidViewModel {
         listeList = repository.getAllListe();
     }
 
-    LiveData<List<ListeEntity>> getAllListes() {
+    public LiveData<List<ListeEntity>> getAllListes() {
         return this.listeList;
     }
 
