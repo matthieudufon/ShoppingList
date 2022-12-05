@@ -10,8 +10,8 @@ import android.widget.EditText;
 
 public class NewListeActivity extends AppCompatActivity {
 
-    public static final String EXTRA_REPLY_NOM = "com.example.android.listelistsql.REPLY";
-    public static final String EXTRA_REPLY_LIEU = "com.example.android.listelistsql.REPLY";
+    public static final String EXTRA_REPLY_NOM = "com.example.android.listelistsql.REPLYNOM";
+    public static final String EXTRA_REPLY_LIEU = "com.example.android.listelistsql.REPLYLIEU";
 
     private EditText editTextNom;
     private EditText editTextLieu;
