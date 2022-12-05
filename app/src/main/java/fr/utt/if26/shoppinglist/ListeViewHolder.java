@@ -11,14 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ListeViewHolder extends RecyclerView.ViewHolder {
 
     private final TextView listeItemView;
+    private final TextView listeItemViewLieu;
 
     public ListeViewHolder(@NonNull View itemView) {
         super(itemView);
-        listeItemView = itemView.findViewById(R.id.liste_item_tv);
+        listeItemView = itemView.findViewById(R.id.liste_item_tv1);
+        listeItemViewLieu = itemView.findViewById(R.id.liste_item_tv2);
     }
 
-    public void bind(String content) {
+    public void bind(String content, String lieu) {
         listeItemView.setText(content);
+        listeItemViewLieu.setText(lieu);
     }
 
     static ListeViewHolder create(ViewGroup parent) {
