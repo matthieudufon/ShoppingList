@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.Date;
+
 import fr.utt.if26.shoppinglist.entities.ListeEntity;
 import fr.utt.if26.shoppinglist.viewModels.ListeViewModel;
 
@@ -44,9 +46,11 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            ListeEntity liste = new ListeEntity(
+            ListeEntity liste = null;
+            liste = new ListeEntity(
                     data.getStringExtra(NewListeActivity.EXTRA_REPLY_NOM),
-                    data.getStringExtra(NewListeActivity.EXTRA_REPLY_LIEU)
+                    data.getStringExtra(NewListeActivity.EXTRA_REPLY_LIEU),
+                    new Date(data.getLongExtra(NewListeActivity.EXTRA_REPLY_DATE, new Date().getTime()))
             );
             listeViewModel.insert(liste);
         } else {

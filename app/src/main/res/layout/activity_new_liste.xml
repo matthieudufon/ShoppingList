@@ -23,6 +23,11 @@
         android:ems="10"
         android:inputType="textPersonName" />
 
+    <CalendarView
+        android:id="@+id/new_liste_activity_cv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <Button
         android:id="@+id/new_liste_activity_bt"
         android:layout_width="match_parent"

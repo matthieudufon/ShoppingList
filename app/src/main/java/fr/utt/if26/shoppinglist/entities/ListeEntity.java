@@ -5,6 +5,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Date;
+
 @Entity(tableName= "liste_table")
 public class ListeEntity {
 
@@ -20,9 +22,13 @@ public class ListeEntity {
     @ColumnInfo(name = "liste_lieu")
     private String lieu;
 
-    public ListeEntity(@NonNull String nom, String lieu) {
+    @ColumnInfo(name = "liste_date")
+    private Date date;
+
+    public ListeEntity(@NonNull String nom, String lieu, Date date) {
         this.nom = nom;
         this.lieu = lieu;
+        this.date = date;
     }
 
     public Integer getId() {
@@ -34,6 +40,8 @@ public class ListeEntity {
     }
 
     public String getLieu() { return lieu; }
+
+    public Date getDate() { return this.date; }
 
     public void setId(Integer id) {
         this.id = id;
