@@ -25,6 +25,10 @@ public class AppRepository {
         composeList = appDAO.selectAllCompose();
     }
 
+    public AppDAO getAppDAO() {
+        return appDAO;
+    }
+
     public LiveData<List<AlimentEntity>> getAllAliments() {
         return alimentList;
     }

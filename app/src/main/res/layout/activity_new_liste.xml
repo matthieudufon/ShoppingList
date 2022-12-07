@@ -19,7 +19,7 @@
         android:id="@+id/new_liste_activity_et2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Lieu (facultatif)"
+        android:hint="Lieu"
         android:ems="10"
         android:inputType="textPersonName" />
 

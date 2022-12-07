@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
@@ -16,9 +15,9 @@ import java.util.Date;
 
 public class NewListeActivity extends AppCompatActivity {
 
-    public static final String EXTRA_REPLY_NOM = "com.example.android.listelistsql.REPLYNOM";
-    public static final String EXTRA_REPLY_LIEU = "com.example.android.listelistsql.REPLYLIEU";
-    public static final String EXTRA_REPLY_DATE = "com.example.android.listelistsql.REPLYDATE";
+    public static final String EXTRA_REPLY_NOM = "REPLYNOM";
+    public static final String EXTRA_REPLY_LIEU = "REPLYLIEU";
+    public static final String EXTRA_REPLY_DATE = "REPLYDATE";
 
     private EditText editTextNom;
     private EditText editTextLieu;
@@ -50,20 +49,15 @@ public class NewListeActivity extends AppCompatActivity {
 
         buttonAdd.setOnClickListener(view -> {
             Intent replyIntent = new Intent();
-            if (TextUtils.isEmpty(editTextNom.getText())) {
+            if (TextUtils.isEmpty(editTextNom.getText()) || TextUtils.isEmpty(editTextLieu.getText())) {
                 setResult(RESULT_CANCELED, replyIntent);
             } else {
                 String nom = editTextNom.getText().toString();
-                String lieu;
-                if (TextUtils.isEmpty(editTextLieu.getText())) {
-                    lieu = "";
-                } else {
-                    lieu = editTextLieu.getText().toString();
-                }
+                String lieu = editTextLieu.getText().toString();
+
                 replyIntent.putExtra(EXTRA_REPLY_NOM, nom);
                 replyIntent.putExtra(EXTRA_REPLY_LIEU, lieu);
                 replyIntent.putExtra(EXTRA_REPLY_DATE, this.date);
-                Log.d("DEBUG-MATTHIEU", date + " long");
                 setResult(RESULT_OK, replyIntent);
             }
             finish();

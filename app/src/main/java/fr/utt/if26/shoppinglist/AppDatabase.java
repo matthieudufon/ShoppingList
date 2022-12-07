@@ -1,7 +1,6 @@
 package fr.utt.if26.shoppinglist;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -10,7 +9,6 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -59,10 +57,8 @@ public abstract class AppDatabase extends RoomDatabase {
                 dao.deleteAllCompose();
                 dao.deleteAllListe();
 
-                ListeEntity liste = new ListeEntity("Courses du samedi", "", new Date());
+                ListeEntity liste = new ListeEntity("Courses du samedi", "Supermarché", new Date());
                 dao.insert(liste);
-
-                Log.d("DEBUG-MATTHIEU", String.valueOf(liste.getId()));
             });
         }
     };

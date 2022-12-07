@@ -19,9 +19,11 @@ public class ListeEntity {
     @ColumnInfo(name = "liste_nom")
     private String nom;
 
+    @NonNull
     @ColumnInfo(name = "liste_lieu")
     private String lieu;
 
+    @NonNull
     @ColumnInfo(name = "liste_date")
     private Date date;
 

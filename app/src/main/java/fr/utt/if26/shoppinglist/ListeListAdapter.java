@@ -23,7 +23,7 @@ public class ListeListAdapter extends ListAdapter<ListeEntity, ListeViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ListeViewHolder holder, int position) {
         ListeEntity current = getItem(position);
-        holder.bind(current.getNom(), current.getLieu(), current.getDate());
+        holder.bind(current.getNom(), current.getLieu(), current.getDate(), current.getId());
     }
 
     static class ListeDiff extends DiffUtil.ItemCallback<ListeEntity> {

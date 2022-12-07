@@ -29,5 +29,4 @@ public class ListeViewModel extends AndroidViewModel {
     public void insert(ListeEntity liste) {
         repository.insert(liste);
     }
-
 }
