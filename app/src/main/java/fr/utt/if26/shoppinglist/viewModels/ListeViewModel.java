@@ -26,6 +26,10 @@ public class ListeViewModel extends AndroidViewModel {
         return this.listeList;
     }
 
+    public LiveData<ListeEntity> getListeById(int id) {
+        return repository.getListeById(id);
+    }
+
     public void insert(ListeEntity liste) {
         repository.insert(liste);
     }

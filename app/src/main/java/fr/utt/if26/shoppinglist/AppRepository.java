@@ -33,12 +33,24 @@ public class AppRepository {
         return alimentList;
     }
 
+    public LiveData<AlimentEntity> getAlimentById(int id) {
+        return appDAO.selectAlimentById(id);
+    }
+
     public LiveData<List<ListeEntity>> getAllListe() {
         return listeList;
     }
 
+    public LiveData<ListeEntity> getListeById(int id) {
+        return appDAO.selectListeById(id);
+    }
+
     public LiveData<List<ComposeEntity>> getAllCompose() {
         return composeList;
+    }
+
+    public LiveData<ComposeEntity> getComposeById(int alimentId, int listeId) {
+        return appDAO.selectComposeById(alimentId, listeId);
     }
 
     public void insert(AlimentEntity aliment) {

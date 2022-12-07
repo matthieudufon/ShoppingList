@@ -59,7 +59,7 @@ public interface AppDAO {
     LiveData<ListeEntity> selectListeById(int listeId);
 
     @Query("SELECT * FROM compose_table WHERE aliment_id = :alimentId AND liste_id = :listeId")
-    LiveData<ComposeEntity> selectListeById(int alimentId, int listeId);
+    LiveData<ComposeEntity> selectComposeById(int alimentId, int listeId);
 
     @Update
     void updateAliment(AlimentEntity aliment);

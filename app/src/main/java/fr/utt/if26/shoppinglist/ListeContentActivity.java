@@ -1,16 +1,13 @@
 package fr.utt.if26.shoppinglist;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
-
-import java.util.List;
 
 import fr.utt.if26.shoppinglist.entities.ListeEntity;
 import fr.utt.if26.shoppinglist.viewModels.ListeViewModel;
@@ -39,35 +36,17 @@ public class ListeContentActivity extends AppCompatActivity {
 
         listeViewModel = new ViewModelProvider(this).get(ListeViewModel.class);
 
-        final Observer<List<ListeEntity>> listeObserver = new Observer<List<ListeEntity>>() {
+        final Observer<ListeEntity> observer = new Observer<ListeEntity>() {
             @Override
-            public void onChanged(List<ListeEntity> listListeEntity) {
-                ListeEntity listeEntityResult = null;
-                for (ListeEntity listeEntity : listListeEntity) {
-                    if (listeEntity.getId() == id) {
-                        listeEntityResult = listeEntity;
-                    }
-                }
-                textViewId.setText(listeEntityResult.getId().toString());
-                textViewLieu.setText(listeEntityResult.getLieu());
-                textViewNom.setText(listeEntityResult.getNom());
-                textViewDate.setText(listeEntityResult.getDate().toString());
+            public void onChanged(@Nullable final ListeEntity liste) {
+                textViewId.setText(liste.getId().toString());
+                textViewLieu.setText(liste.getLieu());
+                textViewNom.setText(liste.getNom());
+                textViewDate.setText(liste.getDate().toString());
             }
         };
 
-        listeViewModel.getAllListes().observe(this, listeObserver);
+        listeViewModel.getListeById(id).observe(this, observer);
 
-        /*AppRepository repository = new AppRepository(getApplication());
-        // repository != null mais liste == null
-        LiveData<ListeEntity> test = repository.getAppDAO().selectListeById(id).;
-        if (test == null) {
-            Log.d("DEBUG-MATTHIEU", "test == null");
-        }
-        ListeEntity liste = repository.getAppDAO().selectListeById(id).getValue();
-
-        textViewId.setText(liste.getId().toString());
-        textViewLieu.setText(liste.getLieu());
-        textViewNom.setText(liste.getNom());
-        textViewDate.setText(liste.getDate().toString());*/
     }
 }

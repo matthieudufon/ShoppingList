@@ -26,6 +26,10 @@ public class ComposeViewModel extends AndroidViewModel {
         return this.composeList;
     }
 
+    LiveData<ComposeEntity> getComposeById(int alimentId, int listeId) {
+        return repository.getComposeById(alimentId, listeId);
+    }
+
     public void insert(ComposeEntity compose) {
         repository.insert(compose);
     }

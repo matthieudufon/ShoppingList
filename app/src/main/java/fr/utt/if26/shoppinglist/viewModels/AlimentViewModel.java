@@ -26,6 +26,10 @@ public class AlimentViewModel extends AndroidViewModel {
         return this.alimentList;
     }
 
+    LiveData<AlimentEntity> getAlimentById(int id) {
+        return repository.getAlimentById(id);
+    }
+
     public void insert(AlimentEntity aliment) {
         repository.insert(aliment);
     }

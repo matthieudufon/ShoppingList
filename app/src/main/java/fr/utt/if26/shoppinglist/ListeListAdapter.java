@@ -35,7 +35,7 @@ public class ListeListAdapter extends ListAdapter<ListeEntity, ListeViewHolder> 
 
         @Override
         public boolean areContentsTheSame(@NonNull ListeEntity oldItem, @NonNull ListeEntity newItem) {
-            return oldItem.getNom().equals(newItem.getId());
+            return oldItem.getId().equals(newItem.getId());
         }
     }
 
