@@ -1,4 +1,4 @@
-package fr.utt.if26.shoppinglist;
+package fr.utt.if26.shoppinglist.holder;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -13,6 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import fr.utt.if26.shoppinglist.ListeContentActivity;
+import fr.utt.if26.shoppinglist.R;
 
 public class ListeViewHolder extends RecyclerView.ViewHolder {
 
@@ -47,7 +50,7 @@ public class ListeViewHolder extends RecyclerView.ViewHolder {
         this.id = id;
     }
 
-    static ListeViewHolder create(ViewGroup parent) {
+    public static ListeViewHolder create(ViewGroup parent) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.liste_item, parent, false);
         return new ListeViewHolder(view);

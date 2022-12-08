@@ -13,6 +13,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Date;
 
+import fr.utt.if26.shoppinglist.adapters.ListeListAdapter;
 import fr.utt.if26.shoppinglist.entities.ListeEntity;
 import fr.utt.if26.shoppinglist.viewModels.ListeViewModel;
 

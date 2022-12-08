@@ -61,6 +61,9 @@ public interface AppDAO {
     @Query("SELECT * FROM compose_table WHERE aliment_id = :alimentId AND liste_id = :listeId")
     LiveData<ComposeEntity> selectComposeById(int alimentId, int listeId);
 
+    @Query("SELECT * FROM aliment_table INNER JOIN compose_table ON compose_table.aliment_id = aliment_table.aliment_id WHERE liste_id = :listeId")
+    LiveData<List<AlimentEntity>> selectAlimentByListe(int listeId);
+
     @Update
     void updateAliment(AlimentEntity aliment);
 

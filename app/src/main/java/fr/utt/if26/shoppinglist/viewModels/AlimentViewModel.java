@@ -22,12 +22,16 @@ public class AlimentViewModel extends AndroidViewModel {
         alimentList = repository.getAllAliments();
     }
 
-    LiveData<List<AlimentEntity>> getAllAliments() {
+    public LiveData<List<AlimentEntity>> getAllAliments() {
         return this.alimentList;
     }
 
-    LiveData<AlimentEntity> getAlimentById(int id) {
+    public LiveData<AlimentEntity> getAlimentById(int id) {
         return repository.getAlimentById(id);
+    }
+
+    public LiveData<List<AlimentEntity>> getAlimentByList(int listeId) {
+        return repository.getAlimentByListe(listeId);
     }
 
     public void insert(AlimentEntity aliment) {

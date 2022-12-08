@@ -1,4 +1,4 @@
-package fr.utt.if26.shoppinglist;
+package fr.utt.if26.shoppinglist.adapters;
 
 import android.view.ViewGroup;
 
@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
+import fr.utt.if26.shoppinglist.holder.ListeViewHolder;
 import fr.utt.if26.shoppinglist.entities.ListeEntity;
 
 public class ListeListAdapter extends ListAdapter<ListeEntity, ListeViewHolder> {
@@ -26,7 +27,7 @@ public class ListeListAdapter extends ListAdapter<ListeEntity, ListeViewHolder> 
         holder.bind(current.getNom(), current.getLieu(), current.getDate(), current.getId());
     }
 
-    static class ListeDiff extends DiffUtil.ItemCallback<ListeEntity> {
+    public static class ListeDiff extends DiffUtil.ItemCallback<ListeEntity> {
 
         @Override
         public boolean areItemsTheSame(@NonNull ListeEntity oldItem, @NonNull ListeEntity newItem) {
