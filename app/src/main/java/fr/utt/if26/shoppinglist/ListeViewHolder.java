@@ -20,6 +20,7 @@ public class ListeViewHolder extends RecyclerView.ViewHolder {
     private final TextView listeItemViewLieu;
     private final TextView listeItemViewDate;
     private final ImageButton listeItemImageButton;
+    private int id = 1;
 
     public ListeViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -27,6 +28,14 @@ public class ListeViewHolder extends RecyclerView.ViewHolder {
         listeItemViewLieu = itemView.findViewById(R.id.liste_item_tv2);
         listeItemViewDate = itemView.findViewById(R.id.liste_item_tv3);
         listeItemImageButton = itemView.findViewById(R.id.liste_item_bt);
+        listeItemImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), ListeContentActivity.class);
+                intent.putExtra("id", id);
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     public void bind(String content, String lieu, Date date, Integer id) {
@@ -35,15 +44,7 @@ public class ListeViewHolder extends RecyclerView.ViewHolder {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String strDate = dateFormat.format(date);
         listeItemViewDate.setText(strDate);
-        listeItemImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), ListeContentActivity.class);
-                intent.putExtra("id", id);
-                view.getContext().startActivity(intent);
-                //Toast.makeText(view.getContext(), "Id récupéré " + id, Toast.LENGTH_SHORT).show();
-            }
-        });
+        this.id = id;
     }
 
     static ListeViewHolder create(ViewGroup parent) {
