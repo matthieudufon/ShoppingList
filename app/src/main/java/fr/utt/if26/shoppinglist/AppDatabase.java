@@ -1,6 +1,7 @@
 package fr.utt.if26.shoppinglist;
 
 import android.content.Context;
+import android.util.JsonReader;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -9,7 +10,16 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -56,6 +66,57 @@ public abstract class AppDatabase extends RoomDatabase {
                 AppDAO dao = INSTANCE.appDAO();
                 dao.deleteAllCompose();
                 dao.deleteAllListe();
+                dao.deleteAllAliment();
+
+                try {
+                    URL url = new URL("https://koumoul.com/data-fair/api/v1/datasets/agribalyse-synthese/lines?&select=Nom_du_Produit_en_Fran%C3%A7ais,Groupe_d%27aliment&size=9999");
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestProperty("accept", "application/json");
+                    connection.setRequestMethod("GET");
+                    InputStream responseStream = connection.getInputStream();
+                    BufferedReader in = new BufferedReader(new InputStreamReader(responseStream));
+                    JsonReader jsonReader = new JsonReader(in);
+                    List<AlimentEntity> alimentList = new ArrayList<AlimentEntity>();
+
+                    jsonReader.beginObject();
+                    while(jsonReader.hasNext()) {
+                        String name = jsonReader.nextName();
+                        if (name.equals("results")) {
+                            jsonReader.beginArray();
+                            while(jsonReader.hasNext()) {
+                                String nom = "";
+                                String categorie = "";
+                                jsonReader.beginObject();
+                                while(jsonReader.hasNext()) {
+                                    String otherName = jsonReader.nextName();
+
+                                    if (otherName.equals("Groupe_d'aliment")) {
+                                        categorie = jsonReader.nextString();
+                                    } else if (otherName.equals("Nom_du_Produit_en_Français")) {
+                                        nom = jsonReader.nextString();
+                                    } else {
+                                        jsonReader.skipValue();
+                                    }
+                                }
+                                jsonReader.endObject();
+                                alimentList.add(new AlimentEntity(nom, categorie));
+                            }
+                            jsonReader.endArray();
+                        } else {
+                            jsonReader.skipValue();
+                        }
+                    }
+                    jsonReader.endObject();
+                    in.close();
+                    connection.disconnect();
+                    for (AlimentEntity aliment : alimentList) {
+                        dao.insert(aliment);
+                    }
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
                 ListeEntity liste = new ListeEntity("Courses du samedi", "Supermarché", new Date());
                 dao.insert(liste);
