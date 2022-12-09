@@ -57,6 +57,10 @@ public class AppRepository {
         return appDAO.selectAlimentByListe(listeId);
     }
 
+    public LiveData<List<String>> getAllAlimentName() {
+        return appDAO.selectAllAlimentName();
+    }
+
     public void insert(AlimentEntity aliment) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
             appDAO.insert(aliment);
