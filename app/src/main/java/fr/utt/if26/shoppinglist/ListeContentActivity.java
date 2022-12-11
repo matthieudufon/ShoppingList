@@ -39,7 +39,7 @@ public class ListeContentActivity extends AppCompatActivity {
     private TextView textViewDate;
     private AutoCompleteTextView autoCompleteTextViewAliment;
     private ImageButton imageButton;
-    private static List<AlimentEntity> alimentList = new ArrayList<AlimentEntity>();
+    private static List<AlimentEntity> alimentList;
     private AlimentEntity selectedAliment;
 
     private ListeViewModel listeViewModel;
@@ -59,6 +59,7 @@ public class ListeContentActivity extends AppCompatActivity {
         imageButton = (ImageButton) findViewById(R.id.liste_content_bt);
 
         Integer id = getIntent().getExtras().getInt("id");
+        this.alimentList = new ArrayList<AlimentEntity>();
 
         listeViewModel = new ViewModelProvider(this).get(ListeViewModel.class);
         alimentViewModel = new ViewModelProvider(this).get(AlimentViewModel.class);
