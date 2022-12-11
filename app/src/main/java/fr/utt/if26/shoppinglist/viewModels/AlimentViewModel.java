@@ -1,10 +1,12 @@
 package fr.utt.if26.shoppinglist.viewModels;
 
 import android.app.Application;
+import android.text.Editable;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import fr.utt.if26.shoppinglist.AppRepository;
@@ -40,6 +42,10 @@ public class AlimentViewModel extends AndroidViewModel {
 
     public void insert(AlimentEntity aliment) {
         repository.insert(aliment);
+    }
+
+    public LiveData<AlimentEntity> getAlimentByNom(String nom) {
+        return repository.getAlimentByNom(nom);
     }
 
 }

@@ -9,10 +9,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -20,8 +23,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.utt.if26.shoppinglist.adapters.ContentListAdapter;
+import fr.utt.if26.shoppinglist.entities.AlimentEntity;
+import fr.utt.if26.shoppinglist.entities.ComposeEntity;
 import fr.utt.if26.shoppinglist.entities.ListeEntity;
 import fr.utt.if26.shoppinglist.viewModels.AlimentViewModel;
+import fr.utt.if26.shoppinglist.viewModels.ComposeViewModel;
 import fr.utt.if26.shoppinglist.viewModels.ListeViewModel;
 
 public class ListeContentActivity extends AppCompatActivity {
@@ -32,9 +38,12 @@ public class ListeContentActivity extends AppCompatActivity {
     private AutoCompleteTextView autoCompleteTextViewAliment;
     private ImageButton imageButton;
     private static List<String> aliments = new ArrayList<String>();
+    private static List<AlimentEntity> alimentList = new ArrayList<AlimentEntity>();
+    private AlimentEntity selectedAliment;
 
     private ListeViewModel listeViewModel;
     private AlimentViewModel alimentViewModel;
+    private ComposeViewModel composeViewModel;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -50,19 +59,16 @@ public class ListeContentActivity extends AppCompatActivity {
 
         Integer id = getIntent().getExtras().getInt("id");
 
+        listeViewModel = new ViewModelProvider(this).get(ListeViewModel.class);
+        alimentViewModel = new ViewModelProvider(this).get(AlimentViewModel.class);
+        composeViewModel = new ViewModelProvider(this).get(ComposeViewModel.class);
+
+
         RecyclerView recyclerView = findViewById(R.id.liste_content_rv);
         final ContentListAdapter adapter = new ContentListAdapter(new ContentListAdapter.ListeDiff());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        ArrayAdapter<String> adapterAutoComplete = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, aliments);
-        autoCompleteTextViewAliment.setAdapter(adapterAutoComplete);
-
-        listeViewModel = new ViewModelProvider(this).get(ListeViewModel.class);
-        alimentViewModel = new ViewModelProvider(this).get(AlimentViewModel.class);
-
         alimentViewModel.getAlimentByList(id).observe(this, adapter::submitList);
-
         final Observer<ListeEntity> observer = new Observer<ListeEntity>() {
             @Override
             public void onChanged(@Nullable final ListeEntity liste) {
@@ -73,19 +79,49 @@ public class ListeContentActivity extends AppCompatActivity {
                 textViewDate.setText(strDate);
             }
         };
-
         listeViewModel.getListeById(id).observe(this, observer);
 
-        alimentViewModel.getAllAlimentName().observe(this, adapterAutoComplete::addAll);
 
-        final Observer<List<String>> observerAutoComplete = new Observer<List<String>>() {
+        ArrayAdapter<AlimentEntity> adapterAutoComplete = new ArrayAdapter<AlimentEntity>(this, android.R.layout.simple_list_item_1, alimentList);
+        autoCompleteTextViewAliment.setAdapter(adapterAutoComplete);
+        alimentViewModel.getAllAliments().observe(this, adapterAutoComplete::addAll);
+        final Observer<List<AlimentEntity>> observerAutoComplete = new Observer<List<AlimentEntity>>() {
             @Override
-            public void onChanged(List<String> strings) {
-                aliments = strings;
+            public void onChanged(List<AlimentEntity> aliments) {
+                alimentList = aliments;
             }
         };
+        alimentViewModel.getAllAliments().observe(this, observerAutoComplete);
 
-        alimentViewModel.getAllAlimentName().observe(this, observerAutoComplete);
+        autoCompleteTextViewAliment.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Object item = adapterView.getItemAtPosition(position);
+                if (item instanceof AlimentEntity) {
+                    selectedAliment = (AlimentEntity) item;
+                }
+            }
+        });
+
+        imageButton.setOnClickListener(view -> {
+            composeViewModel.insert(new ComposeEntity(selectedAliment.getId(), id, 1, 1));
+        });
+        // Deux solutions :
+        // Soit, on utilise une HashMap avec l'autocomplete -> pas de MapAdapter
+        // Soit on rend le nom des aliments unique,
+        // on fait une sélection sur le nom de l'aliment pour obtenir l'entity,
+        // puis on ajoute dans compose l'id de l'entity et ce qui va avec
+
+
+        /*ArrayAdapter<AlimentEntity> adapterAliment = new ArrayAdapter<AlimentEntity>(this, android.R.layout.simple_list_item_1, alimentList);
+        autoCompleteTextViewAliment.setAdapter(adapterAliment);
+        alimentViewModel.getAlimentByNom(autoCompleteTextViewAliment.getText().toString()).observe(this, nom -> {
+            adapterAliment.getAutofillOptions();
+        });
+
+        imageButton.setOnClickListener(view -> {
+            //AlimentEntity aliment = alimentViewModel.getAlimentByNom(autoCompleteTextViewAliment.getText().toString());
+        });*/
 
     }
 }

@@ -4,6 +4,7 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import fr.utt.if26.shoppinglist.entities.AlimentEntity;
@@ -59,6 +60,10 @@ public class AppRepository {
 
     public LiveData<List<String>> getAllAlimentName() {
         return appDAO.selectAllAlimentName();
+    }
+
+    public LiveData<AlimentEntity> getAlimentByNom(String nom) {
+        return appDAO.selectAlimentByNom(nom);
     }
 
     public void insert(AlimentEntity aliment) {

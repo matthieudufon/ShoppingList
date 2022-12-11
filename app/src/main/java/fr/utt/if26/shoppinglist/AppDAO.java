@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import fr.utt.if26.shoppinglist.entities.AlimentEntity;
@@ -66,6 +67,9 @@ public interface AppDAO {
 
     @Query("SELECT aliment_nom FROM aliment_table")
     LiveData<List<String>> selectAllAlimentName();
+
+    @Query("SELECT * FROM aliment_table WHERE aliment_nom = :alimentNom")
+    LiveData<AlimentEntity> selectAlimentByNom(String alimentNom);
 
     @Update
     void updateAliment(AlimentEntity aliment);

@@ -3,9 +3,10 @@ package fr.utt.if26.shoppinglist.entities;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName= "aliment_table")
+@Entity(tableName= "aliment_table", indices = {@Index(value = {"aliment_nom"}, unique = true)})
 public class AlimentEntity {
 
     @PrimaryKey(autoGenerate = true)
@@ -40,6 +41,10 @@ public class AlimentEntity {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String toString() {
+        return nom;
     }
 
 }
