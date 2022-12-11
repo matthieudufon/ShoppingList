@@ -39,7 +39,7 @@ public class NewListeActivity extends AppCompatActivity {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
                 try {
-                    Date dateResult = new SimpleDateFormat("dd/MM/yyyy").parse(dayOfMonth + "/" + month + "/" + year);
+                    Date dateResult = new SimpleDateFormat("dd/MM/yyyy").parse(dayOfMonth + "/" + (month + 1)  + "/" + year);
                     date = dateResult.getTime();
                 } catch (ParseException e) {
                     e.printStackTrace();
