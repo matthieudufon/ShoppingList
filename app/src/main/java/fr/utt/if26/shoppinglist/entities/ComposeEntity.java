@@ -3,8 +3,19 @@ package fr.utt.if26.shoppinglist.entities;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 
-@Entity(tableName = "compose_table", primaryKeys = {"aliment_id", "liste_id"})
+@Entity(tableName = "compose_table",
+        primaryKeys = {"aliment_id", "liste_id"},
+        foreignKeys = {
+        @ForeignKey(entity = AlimentEntity.class,
+                parentColumns = "aliment_id",
+                childColumns = "aliment_id",
+                onDelete = ForeignKey.CASCADE),
+        @ForeignKey(entity = ListeEntity.class,
+                parentColumns = "liste_id",
+                childColumns = "liste_id",
+                onDelete = ForeignKey.CASCADE)})
 public class ComposeEntity {
 
     @NonNull
