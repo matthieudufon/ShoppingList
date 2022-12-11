@@ -15,7 +15,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -106,22 +105,6 @@ public class ListeContentActivity extends AppCompatActivity {
         imageButton.setOnClickListener(view -> {
             composeViewModel.insert(new ComposeEntity(selectedAliment.getId(), id, 1, 1));
         });
-        // Deux solutions :
-        // Soit, on utilise une HashMap avec l'autocomplete -> pas de MapAdapter
-        // Soit on rend le nom des aliments unique,
-        // on fait une sélection sur le nom de l'aliment pour obtenir l'entity,
-        // puis on ajoute dans compose l'id de l'entity et ce qui va avec
-
-
-        /*ArrayAdapter<AlimentEntity> adapterAliment = new ArrayAdapter<AlimentEntity>(this, android.R.layout.simple_list_item_1, alimentList);
-        autoCompleteTextViewAliment.setAdapter(adapterAliment);
-        alimentViewModel.getAlimentByNom(autoCompleteTextViewAliment.getText().toString()).observe(this, nom -> {
-            adapterAliment.getAutofillOptions();
-        });
-
-        imageButton.setOnClickListener(view -> {
-            //AlimentEntity aliment = alimentViewModel.getAlimentByNom(autoCompleteTextViewAliment.getText().toString());
-        });*/
 
     }
 }
