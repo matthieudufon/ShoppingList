@@ -3,6 +3,7 @@ package fr.utt.if26.shoppinglist.holder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,17 +14,45 @@ import fr.utt.if26.shoppinglist.entities.AlimentEntity;
 public class ContentViewHolder extends RecyclerView.ViewHolder {
 
     private final TextView alimentNom;
-    private final TextView alimentCategorie;
+    private final ImageView alimentCategorieImage;
 
     private ContentViewHolder(View itemView) {
         super(itemView);
         alimentNom = itemView.findViewById(R.id.content_item_tv1);
-        alimentCategorie = itemView.findViewById(R.id.content_item_tv2);
+        alimentCategorieImage = (ImageView) itemView.findViewById(R.id.imageView);
     }
 
     public void bind(AlimentEntity aliment) {
         this.alimentNom.setText(aliment.getNom());
-        this.alimentCategorie.setText(aliment.getCategorie());
+        switch (aliment.getCategorie()) {
+            case "Céréales":
+                this.alimentCategorieImage.setImageResource(R.drawable.ic_wheat_24);
+                break;
+            case "Boissons":
+                this.alimentCategorieImage.setImageResource(R.drawable.ic_baseline_wine_bar_24);
+                break;
+            case "Viande et poisson":
+                this.alimentCategorieImage.setImageResource(R.drawable.ic_fish_food_24);
+                break;
+            case "Légumes et fruits":
+                this.alimentCategorieImage.setImageResource(R.drawable.ic_pear_24);
+                break;
+            case "Produits sucrés":
+                this.alimentCategorieImage.setImageResource(R.drawable.ic_cookie_24);
+                break;
+            case "Produits laitiers":
+                this.alimentCategorieImage.setImageResource(R.drawable.ic_milk_bottle_24);
+                break;
+            case "Plats composés":
+                this.alimentCategorieImage.setImageResource(R.drawable.ic_baseline_dinner_dining_24);
+                break;
+            case "Autre":
+                this.alimentCategorieImage.setImageResource(R.drawable.ic_baseline_local_dining_24);
+                break;
+            default:
+                this.alimentCategorieImage.setImageResource(R.drawable.ic_baseline_local_dining_24);
+                break;
+        }
     }
 
     public static ContentViewHolder create(ViewGroup parent) {

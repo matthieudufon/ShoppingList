@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -36,7 +37,6 @@ public class ListeContentActivity extends AppCompatActivity {
     private TextView textViewDate;
     private AutoCompleteTextView autoCompleteTextViewAliment;
     private ImageButton imageButton;
-    private static List<String> aliments = new ArrayList<String>();
     private static List<AlimentEntity> alimentList = new ArrayList<AlimentEntity>();
     private AlimentEntity selectedAliment;
 
@@ -103,7 +103,14 @@ public class ListeContentActivity extends AppCompatActivity {
         });
 
         imageButton.setOnClickListener(view -> {
-            composeViewModel.insert(new ComposeEntity(selectedAliment.getId(), id, 1, 1));
+            try {
+                composeViewModel.insert(new ComposeEntity(selectedAliment.getId(), id, 1, 1));
+            } catch (Exception e) {
+                Toast.makeText(
+                        getApplicationContext(),
+                        "Entrez un aliment valide",
+                        Toast.LENGTH_LONG).show();
+            }
         });
 
     }
