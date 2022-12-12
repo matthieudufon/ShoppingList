@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Iterator;
+
 import fr.utt.if26.shoppinglist.ListeContentActivity;
 import fr.utt.if26.shoppinglist.R;
 import fr.utt.if26.shoppinglist.entities.AlimentEntity;
@@ -33,13 +35,22 @@ public class ContentViewHolder extends RecyclerView.ViewHolder {
         alimentCheckbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Erreur à corriger
+                /* --------------------fonctionne mais petit temps de chargement à chaque fois qu'on coche------------------------
                 ComposeViewModel composeViewModel = ListeContentActivity.composeViewModel;
                 if (((CheckBox) v).isChecked()) {
                     composeViewModel.updateCompose(new ComposeEntity(compose.getAliment_id(), compose.getListe_id(), compose.getQuantite(), compose.getPriorite(), true));
                 } else {
                     composeViewModel.updateCompose(new ComposeEntity(compose.getAliment_id(), compose.getListe_id(), compose.getQuantite(), compose.getPriorite(), false));
+                }*/
+                Iterator<ComposeEntity> iterator = ListeContentActivity.updatedComposeEntities.iterator();
+                while (iterator.hasNext()) {
+                    ComposeEntity composeItemFromList = iterator.next();
+                    if (composeItemFromList.getListe_id() == compose.getListe_id() && composeItemFromList.getAliment_id() == compose.getAliment_id()) {
+                        ListeContentActivity.updatedComposeEntities.remove(composeItemFromList);
+                    }
                 }
+                ComposeEntity newCompose = new ComposeEntity(compose.getAliment_id(), compose.getListe_id(), compose.getQuantite(), compose.getPriorite(), alimentCheckbox.isChecked());
+                ListeContentActivity.updatedComposeEntities.add(newCompose);
             }
         });
     }

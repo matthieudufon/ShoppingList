@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -41,10 +42,11 @@ public class ListeContentActivity extends AppCompatActivity {
     private ImageButton imageButton;
     private static List<AlimentEntity> alimentList;
     private AlimentEntity selectedAliment;
+    public static List<ComposeEntity> updatedComposeEntities;
 
     private ListeViewModel listeViewModel;
     private AlimentViewModel alimentViewModel;
-    public static ComposeViewModel composeViewModel;
+    private ComposeViewModel composeViewModel;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -60,6 +62,7 @@ public class ListeContentActivity extends AppCompatActivity {
 
         Integer id = getIntent().getExtras().getInt("id");
         this.alimentList = new ArrayList<AlimentEntity>();
+        updatedComposeEntities = new ArrayList<ComposeEntity>();
 
         listeViewModel = new ViewModelProvider(this).get(ListeViewModel.class);
         alimentViewModel = new ViewModelProvider(this).get(AlimentViewModel.class);
@@ -70,7 +73,6 @@ public class ListeContentActivity extends AppCompatActivity {
         final ContentListAdapter adapter = new ContentListAdapter(new ContentListAdapter.ListeDiff());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        // faire un getAlimentAndComposeByListe qui renvoie un tableau avec AlimentEntity + ComposeEntity
         alimentViewModel.getAlimentAndComposeByListe(id).observe(this, adapter::submitList);
         final Observer<ListeEntity> observer = new Observer<ListeEntity>() {
             @Override
@@ -96,6 +98,7 @@ public class ListeContentActivity extends AppCompatActivity {
         };
         alimentViewModel.getAllAliments().observe(this, observerAutoComplete);
 
+
         autoCompleteTextViewAliment.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
@@ -105,6 +108,7 @@ public class ListeContentActivity extends AppCompatActivity {
                 }
             }
         });
+
 
         imageButton.setOnClickListener(view -> {
             try {
@@ -120,4 +124,14 @@ public class ListeContentActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        for (ComposeEntity compose : updatedComposeEntities) {
+            composeViewModel.updateCompose(compose);
+            Log.d("DEBUG-MATTHIEU", compose.toString());
+        }
+    }
+
 }
