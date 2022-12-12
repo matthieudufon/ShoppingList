@@ -32,11 +32,15 @@ public class ComposeEntity {
     @ColumnInfo(name = "compose_priorite")
     private int priorite;
 
-    public ComposeEntity(@NonNull int aliment_id, @NonNull int liste_id, @NonNull int quantite, int priorite) {
+    @ColumnInfo(name = "compose_coche")
+    private boolean coche;
+
+    public ComposeEntity(@NonNull int aliment_id, @NonNull int liste_id, @NonNull int quantite, int priorite, boolean coche) {
         this.aliment_id = aliment_id;
         this.liste_id = liste_id;
         this.quantite = quantite;
         this.priorite = priorite;
+        this.coche = coche;
     }
 
     public Integer getAliment_id() {
@@ -52,4 +56,9 @@ public class ComposeEntity {
     }
 
     public int getPriorite() { return priorite; }
+
+    public boolean getCoche() {
+        return coche;
+    }
+
 }

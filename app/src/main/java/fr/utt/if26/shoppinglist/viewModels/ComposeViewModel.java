@@ -34,4 +34,8 @@ public class ComposeViewModel extends AndroidViewModel {
         repository.insert(compose);
     }
 
+    public void updateCompose(ComposeEntity compose) {
+        repository.updateCompose(compose);
+    }
+
 }

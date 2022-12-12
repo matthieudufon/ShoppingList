@@ -46,6 +46,7 @@ public abstract class AppDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                                     AppDatabase.class, "app_database")
                             .addCallback(roomDatabaseCallback)
+                            .allowMainThreadQueries()
                             .build();
                 }
             }
@@ -322,13 +323,13 @@ public abstract class AppDatabase extends RoomDatabase {
                 dao.insert(aliment99);
                 dao.insert(aliment100);
 
-                ComposeEntity compose1 = new ComposeEntity(1, 1, 1, 1);
-                ComposeEntity compose2 = new ComposeEntity(20, 1, 1, 1);
-                ComposeEntity compose3 = new ComposeEntity(14, 1, 1, 1);
-                ComposeEntity compose4 = new ComposeEntity(2, 1, 1, 1);
-                ComposeEntity compose5 = new ComposeEntity(4, 1, 1, 1);
-                ComposeEntity compose6 = new ComposeEntity(7, 1, 1, 1);
-                ComposeEntity compose7 = new ComposeEntity(64, 1, 1, 1);
+                ComposeEntity compose1 = new ComposeEntity(1, 1, 1, 1, false);
+                ComposeEntity compose2 = new ComposeEntity(20, 1, 1, 1, false);
+                ComposeEntity compose3 = new ComposeEntity(14, 1, 1, 1, false);
+                ComposeEntity compose4 = new ComposeEntity(2, 1, 1, 1, false);
+                ComposeEntity compose5 = new ComposeEntity(4, 1, 1, 1, false);
+                ComposeEntity compose6 = new ComposeEntity(7, 1, 1, 1, false);
+                ComposeEntity compose7 = new ComposeEntity(64, 1, 1, 1, false);
                 dao.insert(compose1);
                 dao.insert(compose2);
                 dao.insert(compose3);

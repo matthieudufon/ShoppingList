@@ -4,8 +4,10 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
+import java.util.HashMap;
 import java.util.List;
 
+import fr.utt.if26.shoppinglist.entities.AlimentAndCompose;
 import fr.utt.if26.shoppinglist.entities.AlimentEntity;
 import fr.utt.if26.shoppinglist.entities.ComposeEntity;
 import fr.utt.if26.shoppinglist.entities.ListeEntity;
@@ -55,6 +57,14 @@ public class AppRepository {
 
     public LiveData<List<AlimentEntity>> getAlimentByListe(int listeId) {
         return appDAO.selectAlimentByListe(listeId);
+    }
+
+    public LiveData<List<AlimentAndCompose>> getAlimentAndComposeByListe(int listeId) {
+        return appDAO.selectAlimentAndComposeByListe(listeId);
+    }
+
+    public void updateCompose(ComposeEntity compose) {
+        appDAO.updateCompose(compose);
     }
 
     public void insert(AlimentEntity aliment) {

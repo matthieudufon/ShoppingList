@@ -44,7 +44,7 @@ public class ListeContentActivity extends AppCompatActivity {
 
     private ListeViewModel listeViewModel;
     private AlimentViewModel alimentViewModel;
-    private ComposeViewModel composeViewModel;
+    public static ComposeViewModel composeViewModel;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -70,7 +70,8 @@ public class ListeContentActivity extends AppCompatActivity {
         final ContentListAdapter adapter = new ContentListAdapter(new ContentListAdapter.ListeDiff());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        alimentViewModel.getAlimentByList(id).observe(this, adapter::submitList);
+        // faire un getAlimentAndComposeByListe qui renvoie un tableau avec AlimentEntity + ComposeEntity
+        alimentViewModel.getAlimentAndComposeByListe(id).observe(this, adapter::submitList);
         final Observer<ListeEntity> observer = new Observer<ListeEntity>() {
             @Override
             public void onChanged(@Nullable final ListeEntity liste) {
@@ -107,7 +108,7 @@ public class ListeContentActivity extends AppCompatActivity {
 
         imageButton.setOnClickListener(view -> {
             try {
-                composeViewModel.insert(new ComposeEntity(selectedAliment.getId(), id, 1, 1));
+                composeViewModel.insert(new ComposeEntity(selectedAliment.getId(), id, 1, 1, false));
                 final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
             } catch (Exception e) {
