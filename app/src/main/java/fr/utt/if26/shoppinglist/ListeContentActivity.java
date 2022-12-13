@@ -23,9 +23,11 @@ import android.widget.Toast;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import fr.utt.if26.shoppinglist.adapters.ContentListAdapter;
+import fr.utt.if26.shoppinglist.entities.AlimentAndCompose;
 import fr.utt.if26.shoppinglist.entities.AlimentEntity;
 import fr.utt.if26.shoppinglist.entities.ComposeEntity;
 import fr.utt.if26.shoppinglist.entities.ListeEntity;
@@ -43,6 +45,7 @@ public class ListeContentActivity extends AppCompatActivity {
     private static List<AlimentEntity> alimentList;
     private AlimentEntity selectedAliment;
     public static List<ComposeEntity> updatedComposeEntities;
+    private Integer id;
 
     private ListeViewModel listeViewModel;
     private AlimentViewModel alimentViewModel;
@@ -60,7 +63,7 @@ public class ListeContentActivity extends AppCompatActivity {
         autoCompleteTextViewAliment = (AutoCompleteTextView) findViewById(R.id.liste_content_ac_aliment);
         imageButton = (ImageButton) findViewById(R.id.liste_content_bt);
 
-        Integer id = getIntent().getExtras().getInt("id");
+        id = getIntent().getExtras().getInt("id");
         this.alimentList = new ArrayList<AlimentEntity>();
         updatedComposeEntities = new ArrayList<ComposeEntity>();
 
@@ -73,7 +76,25 @@ public class ListeContentActivity extends AppCompatActivity {
         final ContentListAdapter adapter = new ContentListAdapter(new ContentListAdapter.ListeDiff());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        alimentViewModel.getAlimentAndComposeByListe(id).observe(this, adapter::submitList);
+        alimentViewModel.getAlimentAndComposeByListe(id).observe(this, options -> {
+            // formater options
+            for (AlimentAndCompose alimentAndCompose : options) {
+                if (alimentAndCompose.composes.size() > 1) {
+//                    Iterator<ComposeEntity> it = alimentAndCompose.composes.iterator();
+//                    while (it.hasNext()) {
+//                        ComposeEntity compose = it.next();
+//                        if (compose.getListe_id() != id) {
+//                            alimentAndCompose.composes.remove(compose);
+//                        }
+//                    }
+                    alimentAndCompose.composes.removeIf(compose -> compose.getListe_id() != id);
+                }
+            }
+            adapter.submitList(options);
+            Log.d("DEBUG-MATTHIEU", adapter.getCurrentList().toString());
+        });
+
+
         final Observer<ListeEntity> observer = new Observer<ListeEntity>() {
             @Override
             public void onChanged(@Nullable final ListeEntity liste) {
@@ -90,13 +111,13 @@ public class ListeContentActivity extends AppCompatActivity {
         ArrayAdapter<AlimentEntity> adapterAutoComplete = new ArrayAdapter<AlimentEntity>(this, android.R.layout.simple_list_item_1, alimentList);
         autoCompleteTextViewAliment.setAdapter(adapterAutoComplete);
         alimentViewModel.getAllAliments().observe(this, adapterAutoComplete::addAll);
-        final Observer<List<AlimentEntity>> observerAutoComplete = new Observer<List<AlimentEntity>>() {
+        /*final Observer<List<AlimentEntity>> observerAutoComplete = new Observer<List<AlimentEntity>>() {
             @Override
             public void onChanged(List<AlimentEntity> aliments) {
                 alimentList = aliments;
             }
         };
-        alimentViewModel.getAllAliments().observe(this, observerAutoComplete);
+        alimentViewModel.getAllAliments().observe(this, observerAutoComplete);*/
 
 
         autoCompleteTextViewAliment.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -130,7 +151,6 @@ public class ListeContentActivity extends AppCompatActivity {
         super.onPause();
         for (ComposeEntity compose : updatedComposeEntities) {
             composeViewModel.updateCompose(compose);
-            Log.d("DEBUG-MATTHIEU", compose.toString());
         }
     }
 

@@ -6,8 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
-import java.util.HashMap;
-
 import fr.utt.if26.shoppinglist.entities.AlimentAndCompose;
 import fr.utt.if26.shoppinglist.entities.AlimentEntity;
 import fr.utt.if26.shoppinglist.entities.ComposeEntity;
@@ -28,7 +26,7 @@ public class ContentListAdapter extends ListAdapter<AlimentAndCompose, ContentVi
     @Override
     public void onBindViewHolder(@NonNull ContentViewHolder holder, int position) {
         AlimentEntity aliment = getItem(position).aliment;
-        ComposeEntity compose = getItem(position).compose;
+        ComposeEntity compose = getItem(position).composes.get(0);
         holder.bind(aliment, compose);
     }
 
@@ -41,8 +39,14 @@ public class ContentListAdapter extends ListAdapter<AlimentAndCompose, ContentVi
 
         @Override
         public boolean areContentsTheSame(@NonNull AlimentAndCompose oldItem, @NonNull AlimentAndCompose newItem) {
-            //return oldItem.keySet().equals(newItem.keySet()) && oldItem.values().equals(newItem.values());
-            return oldItem.aliment.getId().equals(newItem.aliment.getId()) && oldItem.compose.getListe_id().equals(newItem.compose.getListe_id());
+            return oldItem.composes.get(0).getListe_id().equals(newItem.composes.get(0).getListe_id()) &&
+                    oldItem.composes.get(0).getAliment_id().equals(newItem.composes.get(0).getAliment_id()) &&
+                    oldItem.composes.get(0).getCoche() == newItem.composes.get(0).getCoche() &&
+                    oldItem.composes.get(0).getPriorite() == newItem.composes.get(0).getPriorite() &&
+                    oldItem.composes.get(0).getQuantite() == newItem.composes.get(0).getQuantite() &&
+                    oldItem.aliment.getCategorie().equals(newItem.aliment.getCategorie()) &&
+                    oldItem.aliment.getNom().equals(newItem.aliment.getNom()) &&
+                    oldItem.aliment.getId().equals(newItem.aliment.getId());
         }
     }
 

@@ -61,4 +61,8 @@ public class ComposeEntity {
         return coche;
     }
 
+    public String toString() {
+        return this.liste_id.toString();
+    }
+
 }
