@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,7 +24,7 @@ import android.widget.Toast;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Date;
 import java.util.List;
 
 import fr.utt.if26.shoppinglist.adapters.ContentListAdapter;
@@ -37,15 +38,19 @@ import fr.utt.if26.shoppinglist.viewModels.ListeViewModel;
 
 public class ListeContentActivity extends AppCompatActivity {
 
+    public static final int DEL_LISTE_ACTIVITY_REQUEST_CODE = 2;
+
     private TextView textViewNom;
     private TextView textViewLieu;
     private TextView textViewDate;
     private AutoCompleteTextView autoCompleteTextViewAliment;
-    private ImageButton imageButton;
+    private ImageButton imageButtonAdd;
+    private ImageButton imageButtonEdit;
     private static List<AlimentEntity> alimentList;
     private AlimentEntity selectedAliment;
     public static List<ComposeEntity> updatedComposeEntities;
     private Integer id;
+    private static final String EXTRA_ID = "ID";
 
     private ListeViewModel listeViewModel;
     private AlimentViewModel alimentViewModel;
@@ -61,7 +66,9 @@ public class ListeContentActivity extends AppCompatActivity {
         textViewLieu = findViewById(R.id.liste_content_tv_lieu);
         textViewDate = findViewById(R.id.liste_content_tv_date);
         autoCompleteTextViewAliment = (AutoCompleteTextView) findViewById(R.id.liste_content_ac_aliment);
-        imageButton = (ImageButton) findViewById(R.id.liste_content_bt);
+        imageButtonAdd = (ImageButton) findViewById(R.id.liste_content_bt_add);
+        imageButtonEdit = (ImageButton) findViewById(R.id.liste_content_bt_edit);
+
 
         id = getIntent().getExtras().getInt("id");
         this.alimentList = new ArrayList<AlimentEntity>();
@@ -131,7 +138,7 @@ public class ListeContentActivity extends AppCompatActivity {
         });
 
 
-        imageButton.setOnClickListener(view -> {
+        imageButtonAdd.setOnClickListener(view -> {
             try {
                 composeViewModel.insert(new ComposeEntity(selectedAliment.getId(), id, 1, 1, false));
                 final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -144,6 +151,12 @@ public class ListeContentActivity extends AppCompatActivity {
             }
         });
 
+        imageButtonEdit.setOnClickListener(view -> {
+            Intent intent = new Intent(ListeContentActivity.this, EditListActivity.class);
+            intent.putExtra(EXTRA_ID, id);
+            startActivityForResult(intent, DEL_LISTE_ACTIVITY_REQUEST_CODE);
+        });
+
     }
 
     @Override
@@ -151,6 +164,19 @@ public class ListeContentActivity extends AppCompatActivity {
         super.onPause();
         for (ComposeEntity compose : updatedComposeEntities) {
             composeViewModel.updateCompose(compose);
+        }
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == DEL_LISTE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            listeViewModel.deleteListeById(data.getIntExtra(EditListActivity.DELETE_LISTE, 0));
+        } else {
+            Toast.makeText(
+                    getApplicationContext(),
+                    "Pas enregistré",
+                    Toast.LENGTH_LONG).show();
         }
     }
 

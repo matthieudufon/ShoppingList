@@ -67,6 +67,10 @@ public class AppRepository {
         appDAO.updateCompose(compose);
     }
 
+    public void updateListe(ListeEntity liste) {
+        appDAO.updateListe(liste);
+    }
+
     public void insert(AlimentEntity aliment) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
             appDAO.insert(aliment);
@@ -83,6 +87,10 @@ public class AppRepository {
         AppDatabase.databaseWriteExecutor.execute(() -> {
             appDAO.insert(compose);
         });
+    }
+
+    public void deleteListeById(int id) {
+        appDAO.deleteListeById(id);
     }
 
 }

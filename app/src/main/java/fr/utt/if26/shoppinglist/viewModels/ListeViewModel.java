@@ -33,4 +33,13 @@ public class ListeViewModel extends AndroidViewModel {
     public void insert(ListeEntity liste) {
         repository.insert(liste);
     }
+
+    public void update(ListeEntity liste) {
+        repository.updateListe(liste);
+    }
+
+    public void deleteListeById(int id) {
+        repository.deleteListeById(id);
+    }
+
 }

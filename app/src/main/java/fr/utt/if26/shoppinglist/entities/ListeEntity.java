@@ -49,4 +49,16 @@ public class ListeEntity {
         this.id = id;
     }
 
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setLieu(String lieu) {
+        this.lieu = lieu;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
 }
