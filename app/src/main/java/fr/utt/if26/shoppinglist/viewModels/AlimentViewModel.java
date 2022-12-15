@@ -1,18 +1,15 @@
 package fr.utt.if26.shoppinglist.viewModels;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import java.util.HashMap;
 import java.util.List;
 
 import fr.utt.if26.shoppinglist.AppRepository;
 import fr.utt.if26.shoppinglist.entities.AlimentAndCompose;
 import fr.utt.if26.shoppinglist.entities.AlimentEntity;
-import fr.utt.if26.shoppinglist.entities.ComposeEntity;
 
 public class AlimentViewModel extends AndroidViewModel {
 
@@ -39,7 +36,6 @@ public class AlimentViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<AlimentAndCompose>> getAlimentAndComposeByListe(int listeId) {
-        Log.d("DEBUG-MATTHIEU", String.valueOf(listeId));
         return repository.getAlimentAndComposeByListe(listeId);
     }
 
