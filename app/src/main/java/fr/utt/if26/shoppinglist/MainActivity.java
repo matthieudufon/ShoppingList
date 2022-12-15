@@ -1,5 +1,7 @@
 package fr.utt.if26.shoppinglist;
 
+import static fr.utt.if26.shoppinglist.holder.ListeViewHolder.CONTENT_LIST_ACTIVITY;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -56,13 +58,8 @@ public class MainActivity extends AppCompatActivity {
                     new Date(data.getLongExtra(NewListeActivity.EXTRA_REPLY_DATE, new Date().getTime()))
             );
             listeViewModel.insert(liste);
-        } else if (requestCode == DEL_LISTE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            Log.d("DEBUG-MATTHIEU", "test");
-        } else {
-            Toast.makeText(
-                    getApplicationContext(),
-                    "Pas enregistré",
-                    Toast.LENGTH_LONG).show();
+        } else if (requestCode == CONTENT_LIST_ACTIVITY && resultCode == RESULT_OK) {
+            listeViewModel.deleteListeById(data.getIntExtra(ListeContentActivity.DELETE_LISTE, 0));
         }
     }
 

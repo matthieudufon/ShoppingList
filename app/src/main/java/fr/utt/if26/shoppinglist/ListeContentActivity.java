@@ -51,6 +51,7 @@ public class ListeContentActivity extends AppCompatActivity {
     public static List<ComposeEntity> updatedComposeEntities;
     private Integer id;
     private static final String EXTRA_ID = "ID";
+    public static final String DELETE_LISTE = "DELETE";
 
     private ListeViewModel listeViewModel;
     private AlimentViewModel alimentViewModel;
@@ -84,21 +85,12 @@ public class ListeContentActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         alimentViewModel.getAlimentAndComposeByListe(id).observe(this, options -> {
-            // formater options
             for (AlimentAndCompose alimentAndCompose : options) {
                 if (alimentAndCompose.composes.size() > 1) {
-//                    Iterator<ComposeEntity> it = alimentAndCompose.composes.iterator();
-//                    while (it.hasNext()) {
-//                        ComposeEntity compose = it.next();
-//                        if (compose.getListe_id() != id) {
-//                            alimentAndCompose.composes.remove(compose);
-//                        }
-//                    }
                     alimentAndCompose.composes.removeIf(compose -> compose.getListe_id() != id);
                 }
             }
             adapter.submitList(options);
-            Log.d("DEBUG-MATTHIEU", adapter.getCurrentList().toString());
         });
 
 
@@ -171,12 +163,10 @@ public class ListeContentActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == DEL_LISTE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            listeViewModel.deleteListeById(data.getIntExtra(EditListActivity.DELETE_LISTE, 0));
-        } else {
-            Toast.makeText(
-                    getApplicationContext(),
-                    "Pas enregistré",
-                    Toast.LENGTH_LONG).show();
+            Intent intent = new Intent();
+            intent.putExtra(DELETE_LISTE, data.getIntExtra(EditListActivity.DELETE_LISTE, 0));
+            setResult(RESULT_OK, intent);
+            finish();
         }
     }
 

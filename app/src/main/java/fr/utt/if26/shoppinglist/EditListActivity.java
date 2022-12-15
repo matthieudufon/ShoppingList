@@ -48,9 +48,13 @@ public class EditListActivity extends AppCompatActivity {
         listeViewModel = new ViewModelProvider(this).get(ListeViewModel.class);
 
         listeViewModel.getListeById(id).observe(this, options -> {
-            editTextNom.setText(options.getNom());
-            editTextLieu.setText(options.getLieu());
-            calendarViewDate.setDate(options.getDate().getTime());
+            try {
+                editTextNom.setText(options.getNom());
+                editTextLieu.setText(options.getLieu());
+                calendarViewDate.setDate(options.getDate().getTime());
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
         });
 
         calendarViewDate.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -79,7 +83,7 @@ public class EditListActivity extends AppCompatActivity {
         });
 
         imageButtonDelete.setOnClickListener(view -> {
-            Intent intent = new Intent(EditListActivity.this, ListeContentActivity.class);
+            Intent intent = new Intent();
             intent.putExtra(DELETE_LISTE, id);
             setResult(RESULT_OK, intent);
             finish();

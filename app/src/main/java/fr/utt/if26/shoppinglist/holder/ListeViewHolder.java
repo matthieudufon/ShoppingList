@@ -1,5 +1,6 @@
 package fr.utt.if26.shoppinglist.holder;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,8 @@ public class ListeViewHolder extends RecyclerView.ViewHolder {
     private final ImageButton listeItemImageButton;
     private int id = 1;
 
+    public static final int CONTENT_LIST_ACTIVITY = 3;
+
     public ListeViewHolder(@NonNull View itemView) {
         super(itemView);
         listeItemView = itemView.findViewById(R.id.liste_item_tv1);
@@ -36,7 +39,7 @@ public class ListeViewHolder extends RecyclerView.ViewHolder {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), ListeContentActivity.class);
                 intent.putExtra("id", id);
-                view.getContext().startActivity(intent);
+                ((Activity)view.getContext()).startActivityForResult(intent, CONTENT_LIST_ACTIVITY);
             }
         });
     }
