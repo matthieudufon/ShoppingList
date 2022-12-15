@@ -11,7 +11,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -24,7 +23,6 @@ import android.widget.Toast;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import fr.utt.if26.shoppinglist.adapters.ContentListAdapter;
@@ -110,13 +108,6 @@ public class ListeContentActivity extends AppCompatActivity {
         ArrayAdapter<AlimentEntity> adapterAutoComplete = new ArrayAdapter<AlimentEntity>(this, android.R.layout.simple_list_item_1, alimentList);
         autoCompleteTextViewAliment.setAdapter(adapterAutoComplete);
         alimentViewModel.getAllAliments().observe(this, adapterAutoComplete::addAll);
-        /*final Observer<List<AlimentEntity>> observerAutoComplete = new Observer<List<AlimentEntity>>() {
-            @Override
-            public void onChanged(List<AlimentEntity> aliments) {
-                alimentList = aliments;
-            }
-        };
-        alimentViewModel.getAllAliments().observe(this, observerAutoComplete);*/
 
 
         autoCompleteTextViewAliment.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -53,7 +54,10 @@ public class EditListActivity extends AppCompatActivity {
                 editTextLieu.setText(options.getLieu());
                 calendarViewDate.setDate(options.getDate().getTime());
             } catch (NullPointerException e) {
-                e.printStackTrace();
+                Toast.makeText(
+                        getApplicationContext(),
+                        "Liste supprimée",
+                        Toast.LENGTH_LONG).show();
             }
         });
 
