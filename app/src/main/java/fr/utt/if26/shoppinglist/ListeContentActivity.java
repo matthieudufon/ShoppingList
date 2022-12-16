@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.utt.if26.shoppinglist.adapters.ContentListAdapter;
-import fr.utt.if26.shoppinglist.entities.AlimentAndCompose;
+import fr.utt.if26.shoppinglist.entities.embedded.AlimentAndCompose;
 import fr.utt.if26.shoppinglist.entities.AlimentEntity;
 import fr.utt.if26.shoppinglist.entities.ComposeEntity;
 import fr.utt.if26.shoppinglist.entities.ListeEntity;
@@ -126,6 +126,9 @@ public class ListeContentActivity extends AppCompatActivity {
                 composeViewModel.insert(new ComposeEntity(selectedAliment.getId(), id, 1, 1, false));
                 final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+                for (ComposeEntity compose : updatedComposeEntities) {
+                    composeViewModel.updateCompose(compose);
+                }
             } catch (Exception e) {
                 Toast.makeText(
                         getApplicationContext(),

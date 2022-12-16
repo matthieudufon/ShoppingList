@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
-import fr.utt.if26.shoppinglist.entities.AlimentAndCompose;
+import fr.utt.if26.shoppinglist.entities.embedded.AlimentAndCompose;
 import fr.utt.if26.shoppinglist.entities.AlimentEntity;
 import fr.utt.if26.shoppinglist.entities.ComposeEntity;
 import fr.utt.if26.shoppinglist.holder.ContentViewHolder;

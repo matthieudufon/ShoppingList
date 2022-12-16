@@ -5,12 +5,11 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-import androidx.room.Transaction;
 import androidx.room.Update;
 
 import java.util.List;
 
-import fr.utt.if26.shoppinglist.entities.AlimentAndCompose;
+import fr.utt.if26.shoppinglist.entities.embedded.AlimentAndCompose;
 import fr.utt.if26.shoppinglist.entities.AlimentEntity;
 import fr.utt.if26.shoppinglist.entities.ComposeEntity;
 import fr.utt.if26.shoppinglist.entities.ListeEntity;
@@ -66,7 +65,7 @@ public interface AppDAO {
     @Query("SELECT * FROM aliment_table INNER JOIN compose_table ON compose_table.aliment_id = aliment_table.aliment_id WHERE liste_id = :listeId")
     LiveData<List<AlimentEntity>> selectAlimentByListe(int listeId);
 
-    @Query("SELECT * FROM aliment_table INNER JOIN compose_table ON compose_table.aliment_id = aliment_table.aliment_id WHERE liste_id = :listeId ORDER BY compose_table.compose_coche, compose_table.compose_priorite, aliment_table.aliment_categorie")
+    @Query("SELECT * FROM aliment_table INNER JOIN compose_table ON compose_table.aliment_id = aliment_table.aliment_id WHERE compose_table.liste_id = :listeId ORDER BY compose_table.compose_coche, compose_table.compose_priorite, aliment_table.aliment_categorie")
     LiveData<List<AlimentAndCompose>> selectAlimentAndComposeByListe(int listeId);
 
     @Update

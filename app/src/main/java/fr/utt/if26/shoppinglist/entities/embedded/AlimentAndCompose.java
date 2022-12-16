@@ -1,9 +1,12 @@
-package fr.utt.if26.shoppinglist.entities;
+package fr.utt.if26.shoppinglist.entities.embedded;
 
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
 import java.util.List;
+
+import fr.utt.if26.shoppinglist.entities.AlimentEntity;
+import fr.utt.if26.shoppinglist.entities.ComposeEntity;
 
 public class AlimentAndCompose {
 

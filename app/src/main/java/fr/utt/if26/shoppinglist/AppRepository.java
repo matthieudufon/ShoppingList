@@ -4,10 +4,9 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
-import java.util.HashMap;
 import java.util.List;
 
-import fr.utt.if26.shoppinglist.entities.AlimentAndCompose;
+import fr.utt.if26.shoppinglist.entities.embedded.AlimentAndCompose;
 import fr.utt.if26.shoppinglist.entities.AlimentEntity;
 import fr.utt.if26.shoppinglist.entities.ComposeEntity;
 import fr.utt.if26.shoppinglist.entities.ListeEntity;
