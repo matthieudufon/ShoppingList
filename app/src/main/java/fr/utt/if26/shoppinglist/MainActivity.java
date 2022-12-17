@@ -2,15 +2,23 @@ package fr.utt.if26.shoppinglist;
 
 import static fr.utt.if26.shoppinglist.holder.ListeViewHolder.CONTENT_LIST_ACTIVITY;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.Date;
 
@@ -18,7 +26,13 @@ import fr.utt.if26.shoppinglist.adapters.ListeListAdapter;
 import fr.utt.if26.shoppinglist.entities.ListeEntity;
 import fr.utt.if26.shoppinglist.viewModels.ListeViewModel;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    Toolbar toolbar;
+    Menu menu;
+    RecyclerView recyclerView;
 
     private ListeViewModel listeViewModel;
     public static final int NEW_LISTE_ACTIVITY_REQUEST_CODE = 1;
@@ -29,7 +43,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RecyclerView recyclerView = findViewById(R.id.activity_main_rv);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.navigator_layout);
+        toolbar = findViewById(R.id.toolbar_id);
+        setSupportActionBar(toolbar);
+
+        menu = navigationView.getMenu();
+        navigationView.getHeaderView(0);
+        navigationView.bringToFront();
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setCheckedItem(R.id.home);
+
+        recyclerView = findViewById(R.id.activity_main_rv);
         final ListeListAdapter adapter = new ListeListAdapter(new ListeListAdapter.ListeDiff());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -61,4 +90,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.home:
+                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
+            case R.id.aliments:
+                // startActivity(new Intent())
+                break;
+            default:
+                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
+        }
+        return false;
+    }
 }

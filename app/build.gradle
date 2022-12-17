@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace 'fr.utt.if26.shoppinglist'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "fr.utt.if26.shoppinglist"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -33,6 +33,7 @@ dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
+    implementation 'androidx.compose.material3:material3:1.0.0-beta02'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.room:room-common:2.4.3'
     implementation 'androidx.room:room-runtime:2.4.3'

@@ -121,6 +121,10 @@ public abstract class AppDatabase extends RoomDatabase {
 
                 ListeEntity liste = new ListeEntity("Courses du samedi", "Supermarché", new Date());
                 dao.insert(liste);
+                ListeEntity liste2 = new ListeEntity("Courses du dimanche", "Marché", new Date());
+                dao.insert(liste2);
+                ListeEntity liste3 = new ListeEntity("Courses du lundi", "Boulangerie", new Date());
+                dao.insert(liste3);
 
                 AlimentEntity aliment1 = new AlimentEntity("Pain", "Céréales");
                 AlimentEntity aliment2 = new AlimentEntity("Coca-Cola", "Boissons");
@@ -337,6 +341,21 @@ public abstract class AppDatabase extends RoomDatabase {
                 dao.insert(compose5);
                 dao.insert(compose6);
                 dao.insert(compose7);
+
+                ComposeEntity compose8 = new ComposeEntity(10, 2, 5, 1, false);
+                ComposeEntity compose9 = new ComposeEntity(25, 2, 17, 1, false);
+                ComposeEntity compose10 = new ComposeEntity(35, 2, 1, 1, false);
+                ComposeEntity compose11 = new ComposeEntity(45, 2, 6, 1, false);
+                dao.insert(compose8);
+                dao.insert(compose9);
+                dao.insert(compose10);
+                dao.insert(compose11);
+
+                ComposeEntity compose12 = new ComposeEntity(55, 3, 5, 1, false);
+                ComposeEntity compose13 = new ComposeEntity(60, 3, 1, 1, true);
+                dao.insert(compose12);
+                dao.insert(compose13);
+
             });
         }
     };

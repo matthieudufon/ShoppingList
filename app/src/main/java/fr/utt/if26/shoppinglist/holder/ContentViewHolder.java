@@ -55,7 +55,7 @@ public class ContentViewHolder extends RecyclerView.ViewHolder {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (!alimentQuantite.getText().toString().equals("")) {
+                if (!alimentQuantite.getText().toString().equals("") && !alimentQuantite.getText().toString().equals("0")) {
                     updateComposeList();
                 }
             }
