@@ -53,7 +53,7 @@ public class ListeContentActivity extends AppCompatActivity {
 
     private ListeViewModel listeViewModel;
     private AlimentViewModel alimentViewModel;
-    private ComposeViewModel composeViewModel;
+    private static ComposeViewModel composeViewModel;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -143,6 +143,10 @@ public class ListeContentActivity extends AppCompatActivity {
             startActivityForResult(intent, DEL_LISTE_ACTIVITY_REQUEST_CODE);
         });
 
+    }
+
+    public static ComposeViewModel getComposeViewModel() {
+        return composeViewModel;
     }
 
     @Override

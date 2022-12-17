@@ -92,4 +92,8 @@ public class AppRepository {
         appDAO.deleteListeById(id);
     }
 
+    public void deleteComposeById(int alimentId, int listeId) {
+        appDAO.deleteComposeById(alimentId, listeId);
+    }
+
 }

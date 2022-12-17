@@ -45,6 +45,14 @@
             android:textAlignment="center"
             android:inputType="number" />
 
+        <ImageButton
+            android:id="@+id/content_item_ib"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            app:srcCompat="@drawable/ic_baseline_delete_24" />
+
     </LinearLayout>
 
 </LinearLayout>

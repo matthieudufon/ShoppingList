@@ -38,4 +38,8 @@ public class ComposeViewModel extends AndroidViewModel {
         repository.updateCompose(compose);
     }
 
+    public void deleteComposeById(int alimentId, int listeId) {
+        repository.deleteComposeById(alimentId, listeId);
+    }
+
 }

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ import fr.utt.if26.shoppinglist.ListeContentActivity;
 import fr.utt.if26.shoppinglist.R;
 import fr.utt.if26.shoppinglist.entities.AlimentEntity;
 import fr.utt.if26.shoppinglist.entities.ComposeEntity;
+import fr.utt.if26.shoppinglist.viewModels.ComposeViewModel;
 
 public class ContentViewHolder extends RecyclerView.ViewHolder {
 
@@ -23,8 +25,11 @@ public class ContentViewHolder extends RecyclerView.ViewHolder {
     private final ImageView alimentCategorieImage;
     private final CheckBox alimentCheckbox;
     private final EditText alimentQuantite;
+    private final ImageButton alimentDelete;
 
     private ComposeEntity compose;
+
+    private ComposeViewModel composeViewModel;
 
     private ContentViewHolder(View itemView) {
         super(itemView);
@@ -32,6 +37,8 @@ public class ContentViewHolder extends RecyclerView.ViewHolder {
         alimentCategorieImage = (ImageView) itemView.findViewById(R.id.content_item_iv);
         alimentCheckbox = (CheckBox) itemView.findViewById(R.id.content_item_cb);
         alimentQuantite = (EditText) itemView.findViewById(R.id.content_item_et1);
+        alimentDelete = (ImageButton) itemView.findViewById(R.id.content_item_ib);
+        composeViewModel = ListeContentActivity.getComposeViewModel();
         compose = null;
         alimentCheckbox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +58,12 @@ public class ContentViewHolder extends RecyclerView.ViewHolder {
                 if (!alimentQuantite.getText().toString().equals("")) {
                     updateComposeList();
                 }
+            }
+        });
+        alimentDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                composeViewModel.deleteComposeById(compose.getAliment_id(), compose.getListe_id());
             }
         });
     }
