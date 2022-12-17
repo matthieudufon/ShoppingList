@@ -1,9 +1,12 @@
 package fr.utt.if26.shoppinglist.holder;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,6 +24,7 @@ public class ContentViewHolder extends RecyclerView.ViewHolder {
     private final TextView alimentNom;
     private final ImageView alimentCategorieImage;
     private final CheckBox alimentCheckbox;
+    private final EditText alimentQuantite;
 
     private ComposeEntity compose;
 
@@ -29,19 +33,26 @@ public class ContentViewHolder extends RecyclerView.ViewHolder {
         alimentNom = itemView.findViewById(R.id.content_item_tv1);
         alimentCategorieImage = (ImageView) itemView.findViewById(R.id.content_item_iv);
         alimentCheckbox = (CheckBox) itemView.findViewById(R.id.content_item_cb);
+        alimentQuantite = (EditText) itemView.findViewById(R.id.content_item_et1);
         compose = null;
         alimentCheckbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Iterator<ComposeEntity> iterator = ListeContentActivity.updatedComposeEntities.iterator();
-                while (iterator.hasNext()) {
-                    ComposeEntity composeItemFromList = iterator.next();
-                    if (composeItemFromList.getListe_id() == compose.getListe_id() && composeItemFromList.getAliment_id() == compose.getAliment_id()) {
-                        ListeContentActivity.updatedComposeEntities.remove(composeItemFromList);
-                    }
+                updateComposeList();
+            }
+        });
+        alimentQuantite.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (!alimentQuantite.getText().toString().equals("")) {
+                    updateComposeList();
                 }
-                ComposeEntity newCompose = new ComposeEntity(compose.getAliment_id(), compose.getListe_id(), compose.getQuantite(), compose.getPriorite(), alimentCheckbox.isChecked());
-                ListeContentActivity.updatedComposeEntities.add(newCompose);
             }
         });
     }
@@ -50,6 +61,7 @@ public class ContentViewHolder extends RecyclerView.ViewHolder {
         this.alimentNom.setText(aliment.getNom());
         this.alimentCheckbox.setChecked(compose.getCoche());
         this.compose = compose;
+        this.alimentQuantite.setText(String.valueOf(compose.getQuantite()));
         switch (aliment.getCategorie()) {
             case "Céréales":
                 this.alimentCategorieImage.setImageResource(R.drawable.ic_wheat_24);
@@ -79,6 +91,12 @@ public class ContentViewHolder extends RecyclerView.ViewHolder {
                 this.alimentCategorieImage.setImageResource(R.drawable.ic_baseline_local_dining_24);
                 break;
         }
+    }
+
+    public void updateComposeList() {
+        ListeContentActivity.updatedComposeEntities.removeIf(updatedCompose -> updatedCompose.getListe_id() == compose.getListe_id() && updatedCompose.getAliment_id() == compose.getAliment_id());
+        ComposeEntity newCompose = new ComposeEntity(compose.getAliment_id(), compose.getListe_id(), Integer.valueOf(alimentQuantite.getText().toString()), compose.getPriorite(), alimentCheckbox.isChecked());
+        ListeContentActivity.updatedComposeEntities.add(newCompose);
     }
 
     public static ContentViewHolder create(ViewGroup parent) {
