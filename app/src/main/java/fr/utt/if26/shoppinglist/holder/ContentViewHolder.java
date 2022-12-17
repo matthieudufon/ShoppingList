@@ -12,8 +12,6 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.Iterator;
-
 import fr.utt.if26.shoppinglist.ListeContentActivity;
 import fr.utt.if26.shoppinglist.R;
 import fr.utt.if26.shoppinglist.entities.AlimentEntity;

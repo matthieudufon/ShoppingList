@@ -13,14 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import fr.utt.if26.shoppinglist.ListeContentActivity;
 import fr.utt.if26.shoppinglist.R;
+import fr.utt.if26.shoppinglist.entities.ListeEntity;
 
 public class ListeViewHolder extends RecyclerView.ViewHolder {
 
-    private final TextView listeItemView;
+    private final TextView listeItemViewNom;
     private final TextView listeItemViewLieu;
     private final TextView listeItemViewDate;
     private final ImageButton listeItemImageButton;
@@ -30,7 +30,7 @@ public class ListeViewHolder extends RecyclerView.ViewHolder {
 
     public ListeViewHolder(@NonNull View itemView) {
         super(itemView);
-        listeItemView = itemView.findViewById(R.id.liste_item_tv1);
+        listeItemViewNom = itemView.findViewById(R.id.liste_item_tv1);
         listeItemViewLieu = itemView.findViewById(R.id.liste_item_tv2);
         listeItemViewDate = itemView.findViewById(R.id.liste_item_tv3);
         listeItemImageButton = itemView.findViewById(R.id.liste_item_bt);
@@ -44,13 +44,13 @@ public class ListeViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    public void bind(String content, String lieu, Date date, Integer id) {
-        listeItemView.setText(content);
-        listeItemViewLieu.setText(lieu);
+    public void bind(ListeEntity liste) {
+        listeItemViewNom.setText(liste.getNom());
+        listeItemViewLieu.setText(liste.getLieu());
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String strDate = dateFormat.format(date);
+        String strDate = dateFormat.format(liste.getDate());
         listeItemViewDate.setText(strDate);
-        this.id = id;
+        this.id = liste.getId();
     }
 
     public static ListeViewHolder create(ViewGroup parent) {
