@@ -17,7 +17,7 @@ import java.util.Date;
 
 import fr.utt.if26.shoppinglist.viewModels.ListeViewModel;
 
-public class EditListActivity extends AppCompatActivity {
+public class EditListeActivity extends AppCompatActivity {
 
     public static final String DELETE_LISTE = "DELETE";
 

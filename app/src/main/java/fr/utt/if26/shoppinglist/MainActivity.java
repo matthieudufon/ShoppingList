@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.aliments:
-                // startActivity(new Intent())
+                startActivity(new Intent(MainActivity.this, AlimentsActivity.class));
                 break;
             default:
                 drawerLayout.closeDrawer(GravityCompat.START);

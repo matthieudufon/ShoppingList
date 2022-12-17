@@ -138,7 +138,7 @@ public class ListeContentActivity extends AppCompatActivity {
         });
 
         imageButtonEdit.setOnClickListener(view -> {
-            Intent intent = new Intent(ListeContentActivity.this, EditListActivity.class);
+            Intent intent = new Intent(ListeContentActivity.this, EditListeActivity.class);
             intent.putExtra(EXTRA_ID, id);
             startActivityForResult(intent, DEL_LISTE_ACTIVITY_REQUEST_CODE);
         });
@@ -162,7 +162,7 @@ public class ListeContentActivity extends AppCompatActivity {
 
         if (requestCode == DEL_LISTE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             Intent intent = new Intent();
-            intent.putExtra(DELETE_LISTE, data.getIntExtra(EditListActivity.DELETE_LISTE, 0));
+            intent.putExtra(DELETE_LISTE, data.getIntExtra(EditListeActivity.DELETE_LISTE, 0));
             setResult(RESULT_OK, intent);
             finish();
         }
