@@ -43,4 +43,8 @@ public class AlimentViewModel extends AndroidViewModel {
         repository.insert(aliment);
     }
 
+    public void deleteAlimentById(int id) {
+        repository.deleteAlimentById(id);
+    }
+
 }

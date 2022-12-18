@@ -44,7 +44,7 @@ public interface AppDAO {
     @Query("DELETE FROM compose_table WHERE aliment_id = :alimentId AND liste_id = :listeId")
     void deleteComposeById(int alimentId, int listeId);
 
-    @Query("SELECT * FROM aliment_table")
+    @Query("SELECT * FROM aliment_table ORDER BY aliment_nom")
     LiveData<List<AlimentEntity>> selectAllAliment();
 
     @Query("SELECT * FROM liste_table")

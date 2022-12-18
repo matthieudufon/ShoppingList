@@ -2,6 +2,7 @@ package fr.utt.if26.shoppinglist;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -28,6 +29,7 @@ public class MainFragment extends Fragment {
     public static final int NEW_LISTE_ACTIVITY_REQUEST_CODE = 1;
 
     RecyclerView recyclerView;
+    FloatingActionButton fab;
 
     private ListeViewModel listeViewModel;
 
@@ -35,11 +37,12 @@ public class MainFragment extends Fragment {
 
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View result = inflater.inflate(R.layout.fragment_main, container, false);
 
-        recyclerView = result.findViewById(R.id.activity_main_rv);
+        recyclerView = result.findViewById(R.id.fragment_main_rv);
         final ListeListAdapter adapter = new ListeListAdapter(new ListeListAdapter.ListeDiff());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(result.getContext()));
@@ -47,7 +50,7 @@ public class MainFragment extends Fragment {
         listeViewModel = new ViewModelProvider(this).get(ListeViewModel.class);
         listeViewModel.getAllListes().observe(getViewLifecycleOwner(), adapter::submitList);
 
-        FloatingActionButton fab = result.findViewById(R.id.activity_main_fab);
+        fab = result.findViewById(R.id.fragment_main_fab);
         fab.setOnClickListener( view -> {
             Intent intent = new Intent(getActivity(), NewListeActivity.class);
             startActivityForResult(intent, NEW_LISTE_ACTIVITY_REQUEST_CODE);
