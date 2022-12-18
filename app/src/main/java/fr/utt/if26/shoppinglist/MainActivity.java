@@ -8,35 +8,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.Date;
-
-import fr.utt.if26.shoppinglist.adapters.ListeListAdapter;
-import fr.utt.if26.shoppinglist.entities.ListeEntity;
 import fr.utt.if26.shoppinglist.viewModels.ListeViewModel;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    DrawerLayout drawerLayout;
-    NavigationView navigationView;
-    Toolbar toolbar;
-    Menu menu;
-    RecyclerView recyclerView;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private Toolbar toolbar;
+    private Menu menu;
 
     private ListeViewModel listeViewModel;
-    public static final int NEW_LISTE_ACTIVITY_REQUEST_CODE = 1;
-    public static final int DEL_LISTE_ACTIVITY_REQUEST_CODE = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,51 +49,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.home);
 
-        recyclerView = findViewById(R.id.activity_main_rv);
-        final ListeListAdapter adapter = new ListeListAdapter(new ListeListAdapter.ListeDiff());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         listeViewModel = new ViewModelProvider(this).get(ListeViewModel.class);
-        listeViewModel.getAllListes().observe(this, adapter::submitList);
 
-        FloatingActionButton fab = findViewById(R.id.activity_main_fab);
-        fab.setOnClickListener( view -> {
-            Intent intent = new Intent(MainActivity.this, NewListeActivity.class);
-            startActivityForResult(intent, NEW_LISTE_ACTIVITY_REQUEST_CODE);
-        });
-
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == NEW_LISTE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            ListeEntity liste = null;
-            liste = new ListeEntity(
-                    data.getStringExtra(NewListeActivity.EXTRA_REPLY_NOM),
-                    data.getStringExtra(NewListeActivity.EXTRA_REPLY_LIEU),
-                    new Date(data.getLongExtra(NewListeActivity.EXTRA_REPLY_DATE, new Date().getTime()))
-            );
-            listeViewModel.insert(liste);
-        } else if (requestCode == CONTENT_LIST_ACTIVITY && resultCode == RESULT_OK) {
-            listeViewModel.deleteListeById(data.getIntExtra(ListeContentActivity.DELETE_LISTE, 0));
-        }
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Fragment selectedFragment = null;
         switch (item.getItemId()) {
             case R.id.home:
+                selectedFragment = new MainFragment();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.aliments:
-                startActivity(new Intent(MainActivity.this, AlimentsActivity.class));
+                selectedFragment = new AlimentsFragment();
+                drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             default:
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
         }
+        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_fragment, selectedFragment).commit();
         return false;
     }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == CONTENT_LIST_ACTIVITY && resultCode == RESULT_OK) {
+            listeViewModel.deleteListeById(data.getIntExtra(ListeContentActivity.DELETE_LISTE, 0));
+        }
+    }
+
 }
