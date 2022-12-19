@@ -71,7 +71,7 @@ public class ConsoFragment extends Fragment {
         alimentViewModel.getAlimentAndCompose().observe(getViewLifecycleOwner(), options -> {
             for (AlimentAndCompose alimentAndCompose : options) {
                 mapCategorie.put(alimentAndCompose.aliment.getCategorie(),
-                        mapCategorie.get(alimentAndCompose.aliment.getCategorie()) + 1
+                        mapCategorie.get(alimentAndCompose.aliment.getCategorie()) + alimentAndCompose.composes.get(0).getQuantite()
                 );
             }
             createBarChart();

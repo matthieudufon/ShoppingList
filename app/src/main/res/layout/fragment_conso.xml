@@ -27,7 +27,7 @@
             android:textSize="20dp"
             android:textStyle="bold"
             android:padding="10dp"
-            android:text="Votre consommation par catégorie"
+            android:text="@string/votre_consommation_par_cat_gorie"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
