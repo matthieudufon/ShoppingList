@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setCheckedItem(R.id.home);
+        navigationView.setCheckedItem(R.id.listes);
 
         listeViewModel = new ViewModelProvider(this).get(ListeViewModel.class);
 
@@ -57,12 +57,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment selectedFragment = null;
         switch (item.getItemId()) {
-            case R.id.home:
+            case R.id.listes:
                 selectedFragment = new MainFragment();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.aliments:
                 selectedFragment = new AlimentsFragment();
+                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
+            case R.id.conso:
+                selectedFragment = new ConsoFragment();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             default:

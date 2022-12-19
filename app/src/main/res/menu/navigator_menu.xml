@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group>
-        <item
-            android:id="@+id/home"
-            android:title="Accueil">
-        </item>
-        <item
-            android:id="@+id/aliments"
-            android:title="Mes aliments">
-        </item>
-    </group>
+    <item android:title="Général">
+        <menu>
+            <item
+                android:id="@+id/listes"
+                android:title="Mes listes">
+            </item>
+            <item
+                android:id="@+id/aliments"
+                android:title="Mes aliments">
+            </item>
+        </menu>
+    </item>
+
+    <item android:title="Suivi">
+        <menu>
+            <item
+                android:id="@+id/conso"
+                android:title="Ma consommation">
+            </item>
+        </menu>
+    </item>
 
 </menu>

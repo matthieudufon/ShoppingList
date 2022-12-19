@@ -35,6 +35,10 @@ public class AlimentViewModel extends AndroidViewModel {
         return repository.getAlimentByListe(listeId);
     }
 
+    public LiveData<List<AlimentAndCompose>> getAlimentAndCompose() {
+        return repository.getAlimentAndCompose();
+    }
+
     public LiveData<List<AlimentAndCompose>> getAlimentAndComposeByListe(int listeId) {
         return repository.getAlimentAndComposeByListe(listeId);
     }

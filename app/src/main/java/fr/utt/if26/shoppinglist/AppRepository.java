@@ -58,6 +58,10 @@ public class AppRepository {
         return appDAO.selectAlimentByListe(listeId);
     }
 
+    public LiveData<List<AlimentAndCompose>> getAlimentAndCompose() {
+        return appDAO.selectAlimentAndCompose();
+    }
+
     public LiveData<List<AlimentAndCompose>> getAlimentAndComposeByListe(int listeId) {
         return appDAO.selectAlimentAndComposeByListe(listeId);
     }
