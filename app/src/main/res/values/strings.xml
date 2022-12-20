@@ -4,4 +4,8 @@
     <string name="nav_close">Fermer</string>
     <string name="conso">Votre consommation par catégorie</string>
     <string name="favorite">Vos aliments favoris</string>
+    <string name="author">Développé par Matthieu DUFON</string>
+    <string name="context">Dans le cadre d\'un projet universitaire</string>
+    <string name="ue">Pour l\'UE IF26 au semestre A22</string>
+    <string name="github">Consulter sur Github</string>
 </resources>

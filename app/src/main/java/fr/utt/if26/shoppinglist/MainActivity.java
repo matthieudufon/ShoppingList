@@ -73,7 +73,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 selectedFragment = new FavoriteFragment();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
+            case R.id.saved_listes:
+                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
+            case R.id.param:
+                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
+            case R.id.about:
+                selectedFragment = new AboutFragment();
+                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
             default:
+                selectedFragment = new MainFragment();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
         }

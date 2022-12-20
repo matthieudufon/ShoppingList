@@ -11,6 +11,10 @@
                 android:id="@+id/aliments"
                 android:title="Mes aliments">
             </item>
+            <item
+                android:id="@+id/saved_listes"
+                android:title="Mes listes enregistrées">
+            </item>
         </menu>
     </item>
 
@@ -23,6 +27,19 @@
             <item
                 android:id="@+id/favorite"
                 android:title="Mes aliments préférés">
+            </item>
+        </menu>
+    </item>
+
+    <item android:title="Informations complémentaires">
+        <menu>
+            <item
+                android:id="@+id/param"
+                android:title="Paramètres">
+            </item>
+            <item
+                android:id="@+id/about"
+                android:title="À propos">
             </item>
         </menu>
     </item>
