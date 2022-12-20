@@ -20,6 +20,10 @@
                 android:id="@+id/conso"
                 android:title="Ma consommation">
             </item>
+            <item
+                android:id="@+id/favorite"
+                android:title="Mes aliments préférés">
+            </item>
         </menu>
     </item>
 

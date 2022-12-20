@@ -2,5 +2,6 @@
     <string name="app_name">ShoppingList</string>
     <string name="nav_open">Ouvrir</string>
     <string name="nav_close">Fermer</string>
-    <string name="votre_consommation_par_cat_gorie">Votre consommation par catégorie</string>
+    <string name="conso">Votre consommation par catégorie</string>
+    <string name="favorite">Vos aliments favoris</string>
 </resources>
