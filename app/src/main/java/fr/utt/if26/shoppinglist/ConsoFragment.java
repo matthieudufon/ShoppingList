@@ -15,6 +15,7 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.DefaultValueFormatter;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
 import java.util.ArrayList;
@@ -91,6 +92,7 @@ public class ConsoFragment extends Fragment {
         barEntriesArrayList.add(new BarEntry(6f, mapCategorie.get(categories.get(6))));
         barEntriesArrayList.add(new BarEntry(7f, mapCategorie.get(categories.get(7))));
         barDataSet = new BarDataSet(barEntriesArrayList, "Consommation par catégorie");
+        barDataSet.setValueFormatter(new DefaultValueFormatter(0));
         barData = new BarData(barDataSet);
         barChart.setData(barData);
         barChart.setDrawBorders(true);
@@ -118,6 +120,8 @@ public class ConsoFragment extends Fragment {
         barChart.getAxisRight().setDrawGridLines(false);
         barChart.getAxisLeft().setDrawGridLines(false);
         barChart.getXAxis().setDrawGridLines(false);
+        barChart.setHighlightPerTapEnabled(false);
+        barChart.setScaleEnabled(false);
         barChart.setExtraBottomOffset(10f);
         barChart.animate();
         barChart.invalidate();

@@ -109,6 +109,7 @@ public class FavoriteFragment extends Fragment {
         barChart.getAxisRight().setDrawGridLines(false);
         barChart.getAxisLeft().setDrawGridLines(false);
         barChart.getXAxis().setDrawGridLines(false);
+        barChart.setTouchEnabled(false);
         barChart.animate();
         barChart.invalidate();
     }
