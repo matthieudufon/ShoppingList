@@ -85,6 +85,7 @@ public class FavoriteFragment extends Fragment {
         barData = new BarData(barDataSet);
         barChart.setData(barData);
         barChart.setScaleEnabled(false);
+        barChart.setDrawBorders(true);
         barDataSet.setColor(Color.BLUE);
         barDataSet.setValueTextColor(Color.TRANSPARENT);
         barChart.getDescription().setEnabled(false);
@@ -100,6 +101,9 @@ public class FavoriteFragment extends Fragment {
         xAxis.setTextColor(Color.LTGRAY);
         xAxis.setLabelCount(10);
         xAxis.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+        xAxis.setDrawAxisLine(false);
+        barChart.getAxisRight().setDrawAxisLine(false);
+        barChart.getAxisLeft().setDrawAxisLine(false);
         barChart.getAxisRight().setDrawLabels(false);
         barChart.getLegend().setEnabled(false);
         barChart.getAxisRight().setDrawGridLines(false);

@@ -93,6 +93,7 @@ public class ConsoFragment extends Fragment {
         barDataSet = new BarDataSet(barEntriesArrayList, "Consommation par catégorie");
         barData = new BarData(barDataSet);
         barChart.setData(barData);
+        barChart.setDrawBorders(true);
         barDataSet.setColor(Color.BLUE);
         barDataSet.setValueTextColor(Color.BLACK);
         barDataSet.setValueTextSize(16f);
@@ -104,6 +105,9 @@ public class ConsoFragment extends Fragment {
         xAxis.setGranularity(1);
         xAxis.setGranularityEnabled(true);
         xAxis.setTextSize(14f);
+        xAxis.setDrawAxisLine(false);
+        barChart.getAxisRight().setDrawAxisLine(false);
+        barChart.getAxisLeft().setDrawAxisLine(false);
         barChart.setVisibleXRangeMaximum(3);
         barChart.setDragEnabled(true);
         barData.setBarWidth(0.9f);
