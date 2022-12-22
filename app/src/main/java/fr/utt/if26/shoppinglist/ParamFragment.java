@@ -28,14 +28,36 @@ public class ParamFragment extends Fragment {
         buttonWatermelon = result.findViewById(R.id.fragment_param_bt1);
         buttonApple = result.findViewById(R.id.fragment_param_bt2);
         buttonBanana = result.findViewById(R.id.fragment_param_bt3);
-        /*buttonWatermelon.setOnClickListener(new View.OnClickListener() {
+        buttonWatermelon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getTheme().applyStyle(R.style.Theme_ShoppingListWatermelon, true);
-                System.out.println(getActivity().getTheme().toString());
+                new SharedPreferencesManager(result.getContext()).storeInt("theme", R.style.Theme_ShoppingListWatermelon);
+                reload();
             }
-        });*/
+        });
+        buttonApple.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new SharedPreferencesManager(result.getContext()).storeInt("theme", R.style.Theme_ShoppingList);
+                reload();
+            }
+        });
+        buttonBanana.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new SharedPreferencesManager(result.getContext()).storeInt("theme", R.style.Theme_ShoppingListBanana);
+                reload();
+            }
+        });
 
         return result;
     }
+
+    public void reload() {
+        getActivity().finish();
+        getActivity().overridePendingTransition(0, 0);
+        getActivity().startActivity(getActivity().getIntent());
+        getActivity().overridePendingTransition(0, 0);
+    }
+
 }

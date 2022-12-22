@@ -27,6 +27,7 @@ public class NewListeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        this.setTheme(new SharedPreferencesManager(this).retrieveInt("theme", R.style.Theme_ShoppingList));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_liste);
         editTextNom = findViewById(R.id.new_liste_activity_et1);

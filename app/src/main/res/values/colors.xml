@@ -9,4 +9,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#c4c1b9</color>
     <color name="grey_stronger">#aba9a2</color>
+    <color name="apple_color">#f0f9e6</color>
+    <color name="apple_color_strong">#c9e8ac</color>
+    <color name="banana_color">#f9f4df</color>
+    <color name="banana_color_strong">#ffecab</color>
+    <color name="watermelon_color">#fbe0e5</color>
+    <color name="watermelon_color_strong">#f2b7c3</color>
 </resources>

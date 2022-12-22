@@ -58,6 +58,7 @@ public class ListeContentActivity extends AppCompatActivity {
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        this.setTheme(new SharedPreferencesManager(this).retrieveInt("theme", R.style.Theme_ShoppingList));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_liste_content);
 
