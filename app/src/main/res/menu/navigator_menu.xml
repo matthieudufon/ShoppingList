@@ -11,10 +11,6 @@
                 android:id="@+id/aliments"
                 android:title="Mes aliments">
             </item>
-            <item
-                android:id="@+id/saved_listes"
-                android:title="Mes listes enregistrées">
-            </item>
         </menu>
     </item>
 

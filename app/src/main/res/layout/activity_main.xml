@@ -18,7 +18,7 @@
             android:layout_gravity="start"
             app:headerLayout="@layout/header_navigator"
             app:menu="@menu/navigator_menu"
-            android:background="@color/purple_700">
+            android:background="@color/grey">
         </com.google.android.material.navigation.NavigationView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,7 +29,7 @@
                 android:id="@+id/toolbar_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/purple_700"
+                android:background="@color/grey"
                 android:navigationIcon="@drawable/ic_baseline_menu_24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

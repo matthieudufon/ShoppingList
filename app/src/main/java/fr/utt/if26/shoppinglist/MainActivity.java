@@ -57,10 +57,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment selectedFragment = null;
         switch (item.getItemId()) {
-            case R.id.listes:
-                selectedFragment = new MainFragment();
-                drawerLayout.closeDrawer(GravityCompat.START);
-                break;
             case R.id.aliments:
                 selectedFragment = new AlimentsFragment();
                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -73,10 +69,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 selectedFragment = new FavoriteFragment();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
-            case R.id.saved_listes:
-                drawerLayout.closeDrawer(GravityCompat.START);
-                break;
             case R.id.param:
+                selectedFragment = new ParamFragment();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.about:
