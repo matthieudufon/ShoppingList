@@ -9,48 +9,76 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/activity_edit_list_tv_nom"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/activity_edit_list_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
-
-        <EditText
-            android:id="@+id/activity_edit_list_tv_lieu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
-
-        <CalendarView
-            android:id="@+id/activity_edit_list_cv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:background="@color/grey"
+            android:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+            app:title="Ma liste de courses"></androidx.appcompat.widget.Toolbar>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:padding="10dp">
 
-            <ImageButton
-                android:id="@+id/activity_edit_list_bt_delete"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/activity_edit_list_tv_nom"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/ic_baseline_delete_24" />
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Name" />
 
-            <ImageButton
-                android:id="@+id/activity_edit_list_bt_update"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/activity_edit_list_tv_lieu"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/ic_baseline_save_24" />
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Name" />
+
+            <CalendarView
+                android:id="@+id/activity_edit_list_cv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:dateTextAppearance="@color/black"
+                android:weekDayTextAppearance="@color/black" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/activity_edit_list_bt_delete"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:drawableLeft="@drawable/ic_baseline_delete_24"
+                    android:text="Supprimer"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/activity_edit_list_bt_update"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/activity_edit_list_bt_update"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:drawableLeft="@drawable/ic_baseline_save_24"
+                    android:text="Sauvegarder"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/activity_edit_list_bt_delete"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </LinearLayout>
 

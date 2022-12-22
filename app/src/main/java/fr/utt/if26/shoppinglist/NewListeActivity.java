@@ -1,10 +1,14 @@
 package fr.utt.if26.shoppinglist;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
@@ -23,8 +27,10 @@ public class NewListeActivity extends AppCompatActivity {
     private EditText editTextLieu;
     private CalendarView calendarView;
     private Button buttonAdd;
+    private Toolbar toolbar;
     private long date;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.setTheme(new SharedPreferencesManager(this).retrieveInt("theme", R.style.Theme_ShoppingList));
@@ -34,6 +40,29 @@ public class NewListeActivity extends AppCompatActivity {
         editTextLieu = findViewById(R.id.new_liste_activity_et2);
         calendarView = (CalendarView) findViewById(R.id.new_liste_activity_cv);
         buttonAdd = findViewById(R.id.new_liste_activity_bt);
+        toolbar = findViewById(R.id.new_liste_activity_toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
+
+        switch(new SharedPreferencesManager(this).retrieveInt("theme", R.style.Theme_ShoppingList)) {
+            case R.style.Theme_ShoppingListBanana:
+                buttonAdd.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.banana_color_strong)));
+                toolbar.setBackgroundColor(getResources().getColor(R.color.banana_color_strong));
+                break;
+            case R.style.Theme_ShoppingListWatermelon:
+                buttonAdd.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.watermelon_color_strong)));
+                toolbar.setBackgroundColor(getResources().getColor(R.color.watermelon_color_strong));
+                break;
+            default:
+                buttonAdd.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.apple_color_strong)));
+                toolbar.setBackgroundColor(getResources().getColor(R.color.apple_color_strong));
+                break;
+        }
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
 
@@ -65,4 +94,16 @@ public class NewListeActivity extends AppCompatActivity {
 
         });
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 }

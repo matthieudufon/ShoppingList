@@ -1,14 +1,17 @@
 package fr.utt.if26.shoppinglist;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.text.ParseException;
@@ -27,8 +30,9 @@ public class EditListeActivity extends AppCompatActivity {
     private EditText editTextNom;
     private EditText editTextLieu;
     private CalendarView calendarViewDate;
-    private ImageButton imageButtonDelete;
-    private ImageButton imageButtonUpdate;
+    private Button imageButtonDelete;
+    private Button imageButtonUpdate;
+    private Toolbar toolbar;
 
     private ListeViewModel listeViewModel;
 
@@ -44,8 +48,34 @@ public class EditListeActivity extends AppCompatActivity {
         editTextNom = (EditText) findViewById(R.id.activity_edit_list_tv_nom);
         editTextLieu = (EditText) findViewById(R.id.activity_edit_list_tv_lieu);
         calendarViewDate = (CalendarView) findViewById(R.id.activity_edit_list_cv);
-        imageButtonUpdate = (ImageButton) findViewById(R.id.activity_edit_list_bt_update);
-        imageButtonDelete = (ImageButton) findViewById(R.id.activity_edit_list_bt_delete);
+        imageButtonUpdate = findViewById(R.id.activity_edit_list_bt_update);
+        imageButtonDelete = findViewById(R.id.activity_edit_list_bt_delete);
+        toolbar = findViewById(R.id.activity_edit_list_toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
+
+        switch(new SharedPreferencesManager(this).retrieveInt("theme", R.style.Theme_ShoppingList)) {
+            case R.style.Theme_ShoppingListBanana:
+                imageButtonDelete.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.banana_color_strong)));
+                imageButtonUpdate.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.banana_color_strong)));
+                toolbar.setBackgroundColor(getResources().getColor(R.color.banana_color_strong));
+                break;
+            case R.style.Theme_ShoppingListWatermelon:
+                imageButtonDelete.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.watermelon_color_strong)));
+                imageButtonUpdate.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.watermelon_color_strong)));
+                toolbar.setBackgroundColor(getResources().getColor(R.color.watermelon_color_strong));
+                break;
+            default:
+                imageButtonDelete.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.apple_color_strong)));
+                imageButtonUpdate.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.apple_color_strong)));
+                toolbar.setBackgroundColor(getResources().getColor(R.color.apple_color_strong));
+                break;
+        }
 
         listeViewModel = new ViewModelProvider(this).get(ListeViewModel.class);
 
@@ -95,4 +125,16 @@ public class EditListeActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 }

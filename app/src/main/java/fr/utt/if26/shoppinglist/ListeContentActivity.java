@@ -2,6 +2,7 @@ package fr.utt.if26.shoppinglist;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -38,6 +40,7 @@ public class ListeContentActivity extends AppCompatActivity {
 
     public static final int DEL_LISTE_ACTIVITY_REQUEST_CODE = 2;
 
+    private Toolbar toolbar;
     private TextView textViewNom;
     private TextView textViewLieu;
     private TextView textViewDate;
@@ -68,7 +71,26 @@ public class ListeContentActivity extends AppCompatActivity {
         autoCompleteTextViewAliment = (AutoCompleteTextView) findViewById(R.id.liste_content_ac_aliment);
         imageButtonAdd = (ImageButton) findViewById(R.id.liste_content_bt_add);
         imageButtonEdit = (ImageButton) findViewById(R.id.liste_content_bt_edit);
+        toolbar = findViewById(R.id.liste_content_toolbar);
+        setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
+
+        switch (new SharedPreferencesManager(this).retrieveInt("theme", R.style.Theme_ShoppingList)) {
+            case R.style.Theme_ShoppingListBanana:
+                toolbar.setBackgroundColor(getResources().getColor(R.color.banana_color_strong));
+                break;
+            case R.style.Theme_ShoppingListWatermelon:
+                toolbar.setBackgroundColor(getResources().getColor(R.color.watermelon_color_strong));
+                break;
+            default:
+                toolbar.setBackgroundColor(getResources().getColor(R.color.apple_color_strong));
+                break;
+        }
 
         id = getIntent().getExtras().getInt("id");
         this.alimentList = new ArrayList<AlimentEntity>();
@@ -166,6 +188,17 @@ public class ListeContentActivity extends AppCompatActivity {
             intent.putExtra(DELETE_LISTE, data.getIntExtra(EditListeActivity.DELETE_LISTE, 0));
             setResult(RESULT_OK, intent);
             finish();
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 

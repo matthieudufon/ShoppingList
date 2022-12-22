@@ -9,30 +9,39 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="10dp" >
 
         <TextView
             android:id="@+id/fragment_param_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="//TODO" />
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingVertical="15dp"
+            android:textSize="20dp"
+            android:text="@string/theme_choice" />
 
         <Button
             android:id="@+id/fragment_param_bt1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:textColor="@color/black"
+            android:text="@string/watermelon" />
 
         <Button
             android:id="@+id/fragment_param_bt2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:textColor="@color/black"
+            android:text="@string/apple" />
 
         <Button
             android:id="@+id/fragment_param_bt3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:textColor="@color/black"
+            android:text="@string/banana" />
+
     </LinearLayout>
 </FrameLayout>

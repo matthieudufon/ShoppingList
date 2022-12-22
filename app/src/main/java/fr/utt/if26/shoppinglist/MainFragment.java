@@ -4,6 +4,7 @@ import static android.app.Activity.RESULT_OK;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -51,6 +52,17 @@ public class MainFragment extends Fragment {
         listeViewModel.getAllListes().observe(getViewLifecycleOwner(), adapter::submitList);
 
         fab = result.findViewById(R.id.fragment_main_fab);
+        switch(new SharedPreferencesManager(getContext()).retrieveInt("theme", R.style.Theme_ShoppingList)) {
+            case R.style.Theme_ShoppingListBanana:
+                fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.banana_color_strong)));
+                break;
+            case R.style.Theme_ShoppingListWatermelon:
+                fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.watermelon_color_strong)));
+                break;
+            default:
+                fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.apple_color_strong)));
+                break;
+        }
         fab.setOnClickListener( view -> {
             Intent intent = new Intent(getActivity(), NewListeActivity.class);
             startActivityForResult(intent, NEW_LISTE_ACTIVITY_REQUEST_CODE);

@@ -1,5 +1,6 @@
 package fr.utt.if26.shoppinglist;
 
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -96,7 +97,17 @@ public class ConsoFragment extends Fragment {
         barData = new BarData(barDataSet);
         barChart.setData(barData);
         barChart.setDrawBorders(true);
-        barDataSet.setColor(Color.BLUE);
+        switch(new SharedPreferencesManager(getActivity()).retrieveInt("theme", R.style.Theme_ShoppingList)) {
+            case R.style.Theme_ShoppingListBanana:
+                barDataSet.setColor(getResources().getColor(R.color.banana_color_strong));
+                break;
+            case R.style.Theme_ShoppingListWatermelon:
+                barDataSet.setColor(getResources().getColor(R.color.watermelon_color_strong));
+                break;
+            default:
+                barDataSet.setColor(getResources().getColor(R.color.apple_color_strong));
+                break;
+        }
         barDataSet.setValueTextColor(Color.BLACK);
         barDataSet.setValueTextSize(16f);
         barChart.getDescription().setEnabled(false);

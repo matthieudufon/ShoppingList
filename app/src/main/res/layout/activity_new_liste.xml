@@ -1,37 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="2dp"
     tools:context=".NewListeActivity"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/new_liste_activity_et1"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/new_liste_activity_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nom"
-        android:ems="10"
-        android:inputType="textPersonName" />
+        android:background="@color/grey"
+        android:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        app:title="Ma liste de courses"></androidx.appcompat.widget.Toolbar>
 
-    <EditText
-        android:id="@+id/new_liste_activity_et2"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Lieu"
-        android:ems="10"
-        android:inputType="textPersonName" />
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:orientation="vertical">
 
-    <CalendarView
-        android:id="@+id/new_liste_activity_cv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/new_liste_activity_et1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Nom"
+            android:inputType="textPersonName" />
 
-    <Button
-        android:id="@+id/new_liste_activity_bt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Créer la liste" />
+        <EditText
+            android:id="@+id/new_liste_activity_et2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Lieu"
+            android:inputType="textPersonName" />
+
+        <CalendarView
+            android:id="@+id/new_liste_activity_cv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:dateTextAppearance="@color/black"
+            android:weekDayTextAppearance="@color/black" />
+
+        <Button
+            android:id="@+id/new_liste_activity_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:drawableLeft="@drawable/ic_baseline_add_24"
+            android:text="Créer la liste"
+            android:textColor="@color/black" />
+    </LinearLayout>
 
 </LinearLayout>

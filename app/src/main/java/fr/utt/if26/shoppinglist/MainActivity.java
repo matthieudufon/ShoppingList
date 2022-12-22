@@ -11,7 +11,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -38,24 +37,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigator_layout);
-        toolbar = findViewById(R.id.toolbar_id);
+        toolbar = (Toolbar) findViewById(R.id.toolbar_id);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         switch (new SharedPreferencesManager(this).retrieveInt("theme", R.style.Theme_ShoppingList)) {
             case R.style.Theme_ShoppingListBanana:
                 navigationView.getHeaderView(0).setBackgroundColor(getResources().getColor(R.color.banana_color_strong));
                 navigationView.setBackgroundColor(getResources().getColor(R.color.banana_color));
-                toolbar.setBackgroundColor(getResources().getColor(R.color.banana_color));
+                toolbar.setBackgroundColor(getResources().getColor(R.color.banana_color_strong));
                 break;
             case R.style.Theme_ShoppingListWatermelon:
                 navigationView.getHeaderView(0).setBackgroundColor(getResources().getColor(R.color.watermelon_color_strong));
                 navigationView.setBackgroundColor(getResources().getColor(R.color.watermelon_color));
-                toolbar.setBackgroundColor(getResources().getColor(R.color.watermelon_color));
+                toolbar.setBackgroundColor(getResources().getColor(R.color.watermelon_color_strong));
                 break;
             default:
                 navigationView.getHeaderView(0).setBackgroundColor(getResources().getColor(R.color.apple_color_strong));
                 navigationView.setBackgroundColor(getResources().getColor(R.color.apple_color));
-                toolbar.setBackgroundColor(getResources().getColor(R.color.apple_color));
+                toolbar.setBackgroundColor(getResources().getColor(R.color.apple_color_strong));
                 break;
         }
 

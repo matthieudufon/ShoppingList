@@ -86,7 +86,17 @@ public class FavoriteFragment extends Fragment {
         barChart.setData(barData);
         barChart.setScaleEnabled(false);
         barChart.setDrawBorders(true);
-        barDataSet.setColor(Color.BLUE);
+        switch(new SharedPreferencesManager(getActivity()).retrieveInt("theme", R.style.Theme_ShoppingList)) {
+            case R.style.Theme_ShoppingListBanana:
+                barDataSet.setColor(getResources().getColor(R.color.banana_color_strong));
+                break;
+            case R.style.Theme_ShoppingListWatermelon:
+                barDataSet.setColor(getResources().getColor(R.color.watermelon_color_strong));
+                break;
+            default:
+                barDataSet.setColor(getResources().getColor(R.color.apple_color_strong));
+                break;
+        }
         barDataSet.setValueTextColor(Color.TRANSPARENT);
         barChart.getDescription().setEnabled(false);
         XAxis xAxis = barChart.getXAxis();
@@ -98,7 +108,7 @@ public class FavoriteFragment extends Fragment {
         xAxis.setGranularity(1);
         xAxis.setGranularityEnabled(true);
         xAxis.setTextSize(14f);
-        xAxis.setTextColor(Color.LTGRAY);
+        xAxis.setTextColor(getResources().getColor(R.color.black));
         xAxis.setLabelCount(10);
         xAxis.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
         xAxis.setDrawAxisLine(false);

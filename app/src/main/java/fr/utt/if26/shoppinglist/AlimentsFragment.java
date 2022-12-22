@@ -1,5 +1,6 @@
 package fr.utt.if26.shoppinglist;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -47,6 +48,18 @@ public class AlimentsFragment extends Fragment implements AdapterView.OnItemSele
         editTextNom = result.findViewById(R.id.fragment_aliments_et);
         spinnerCategorie = result.findViewById(R.id.fragment_aliments_spinner);
         validateButton = result.findViewById(R.id.fragment_aliments_ib);
+
+        switch(new SharedPreferencesManager(getActivity()).retrieveInt("theme", R.style.Theme_ShoppingList)) {
+            case R.style.Theme_ShoppingListBanana:
+                validateButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.banana_color_strong)));
+                break;
+            case R.style.Theme_ShoppingListWatermelon:
+                validateButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.watermelon_color_strong)));
+                break;
+            default:
+                validateButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.apple_color_strong)));
+                break;
+        }
 
         recyclerView = result.findViewById(R.id.fragment_aliments_rv);
         final AlimentListAdapter adapter = new AlimentListAdapter(new AlimentListAdapter.AlimentDiff());

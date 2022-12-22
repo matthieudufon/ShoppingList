@@ -8,4 +8,8 @@
     <string name="context">Dans le cadre d\'un projet universitaire à l\'UTT</string>
     <string name="ue">Pour l\'UE IF26 au semestre A22</string>
     <string name="github">Consulter sur Github</string>
+    <string name="theme_choice">Choisissez un thème</string>
+    <string name="watermelon">Watermelon</string>
+    <string name="apple">Apple</string>
+    <string name="banana">Banana</string>
 </resources>
