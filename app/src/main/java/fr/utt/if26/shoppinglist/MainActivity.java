@@ -47,16 +47,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.style.Theme_ShoppingListBanana:
                 navigationView.getHeaderView(0).setBackgroundColor(getResources().getColor(R.color.banana_color_strong));
                 navigationView.setBackgroundColor(getResources().getColor(R.color.banana_color));
+                navigationView.getHeaderView(0).findViewById(R.id.header_iv).setBackground(getResources().getDrawable(R.drawable.banana_image));
                 toolbar.setBackgroundColor(getResources().getColor(R.color.banana_color_strong));
                 break;
             case R.style.Theme_ShoppingListWatermelon:
                 navigationView.getHeaderView(0).setBackgroundColor(getResources().getColor(R.color.watermelon_color_strong));
                 navigationView.setBackgroundColor(getResources().getColor(R.color.watermelon_color));
+                navigationView.getHeaderView(0).findViewById(R.id.header_iv).setBackground(getResources().getDrawable(R.drawable.watermelon_image));
                 toolbar.setBackgroundColor(getResources().getColor(R.color.watermelon_color_strong));
                 break;
             default:
                 navigationView.getHeaderView(0).setBackgroundColor(getResources().getColor(R.color.apple_color_strong));
                 navigationView.setBackgroundColor(getResources().getColor(R.color.apple_color));
+                navigationView.getHeaderView(0).findViewById(R.id.header_iv).setBackground(getResources().getDrawable(R.drawable.apple_image));
                 toolbar.setBackgroundColor(getResources().getColor(R.color.apple_color_strong));
                 break;
         }
