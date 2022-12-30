@@ -7,9 +7,9 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-import fr.utt.if26.shoppinglist.AppRepository;
-import fr.utt.if26.shoppinglist.entities.embedded.AlimentAndCompose;
-import fr.utt.if26.shoppinglist.entities.AlimentEntity;
+import fr.utt.if26.shoppinglist.model.AppRepository;
+import fr.utt.if26.shoppinglist.model.entities.embedded.AlimentAndCompose;
+import fr.utt.if26.shoppinglist.model.entities.AlimentEntity;
 
 public class AlimentViewModel extends AndroidViewModel {
 

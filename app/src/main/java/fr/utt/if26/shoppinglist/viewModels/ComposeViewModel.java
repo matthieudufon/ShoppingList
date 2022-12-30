@@ -7,8 +7,8 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-import fr.utt.if26.shoppinglist.AppRepository;
-import fr.utt.if26.shoppinglist.entities.ComposeEntity;
+import fr.utt.if26.shoppinglist.model.AppRepository;
+import fr.utt.if26.shoppinglist.model.entities.ComposeEntity;
 
 public class ComposeViewModel extends AndroidViewModel {
 
